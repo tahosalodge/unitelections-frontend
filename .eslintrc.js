@@ -9,6 +9,9 @@ module.exports = {
         'no-underscore-dangle': ["error", {
             "allow": ["_id"]
         }],
+        'react/prop-types': ["error", {
+            'ignore': ['classes']
+        }]
     },
     settings: {
         'import/resolver': {

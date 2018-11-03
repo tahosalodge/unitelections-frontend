@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom';
 // import { Provider } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { MuiPickersUtilsProvider } from 'material-ui-pickers';
+import DateFnsUtils from 'material-ui-pickers/utils/date-fns-utils';
+
 // import createStore from 'state';
 import App from './App';
 
@@ -18,15 +21,20 @@ const theme = createMuiTheme({
       main: '#005596',
     },
   },
+  typography: {
+    useNextVariants: true,
+  },
 });
 
 const Root = () => (
-  // <Provider store={store}>
-  <MuiThemeProvider theme={theme}>
-    <CssBaseline />
-    <App />
-  </MuiThemeProvider>
-  // </Provider>
+  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+    {/* <Provider store={store}> */}
+    <MuiThemeProvider theme={theme}>
+      <CssBaseline />
+      <App />
+    </MuiThemeProvider>
+    {/* </Provider> */}
+  </MuiPickersUtilsProvider>
 );
 
 ReactDOM.render(<Root />, document.getElementById('root'));

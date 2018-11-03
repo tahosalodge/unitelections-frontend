@@ -1,0 +1,112 @@
+[{
+    "_id": "5aa37fcd19227b2dfccf4536",
+    "users": [],
+    "pendingUsers": [],
+    "number": "633",
+    "chapter": "white-eagle",
+    "activeMembers": 50,
+    "meetingLocation": {
+      "address1": "8817 S Broadway",
+      "city": "Highlands Ranch",
+      "state": "CO",
+      "zip": "80129",
+      "notes": "St. Lukes United Methodist Church, Youth Room",
+      "original": "8817 S Broadway, Highlands Ranch, CO 80129"
+    },
+    "meetingTime": "07:00 PM",
+    "unitLeader": {
+      "fname": "Bob",
+      "lname": "Willman",
+      "phone": "720-277-5223",
+      "email": "b.willman@comcast.net",
+      "involvement": "non-member"
+    },
+    "adultRepresentative": {
+      "fname": "",
+      "lname": "",
+      "phone": "",
+      "email": ""
+    },
+    "youthRepresentative": {
+      "fname": "",
+      "lname": "",
+      "phone": "",
+      "email": ""
+    },
+    "__v": 0
+  },
+  {
+    "_id": "5aa37fe719227b2dfccf4538",
+    "users": [],
+    "pendingUsers": [],
+    "number": "79",
+    "chapter": "white-buffalo",
+    "activeMembers": 12,
+    "meetingLocation": {
+      "address1": "2300 S St",
+      "city": "",
+      "state": "",
+      "zip": "",
+      "notes": "University Park Elementary School Auditorium\r\n",
+      "original": "2300 S St."
+    },
+    "meetingTime": "07:00 PM",
+    "unitLeader": {
+      "fname": "Steven",
+      "lname": "Hick",
+      "phone": "303-548-9527",
+      "email": "shickdenver@msn.com",
+      "involvement": "brotherhood"
+    },
+    "adultRepresentative": {
+      "fname": "",
+      "lname": "",
+      "phone": "",
+      "email": ""
+    },
+    "youthRepresentative": {
+      "fname": "",
+      "lname": "",
+      "phone": "",
+      "email": ""
+    },
+    "__v": 0
+  },
+  {
+    "_id": "5aa37ff019227b2dfccf453a",
+    "users": [],
+    "pendingUsers": [],
+    "number": "727",
+    "chapter": "white-buffalo",
+    "activeMembers": 5,
+    "meetingLocation": {
+      "address1": "4701 s cham",
+      "city": "",
+      "state": "",
+      "zip": "",
+      "notes": "LDS church. We meet in the Scout room which is the first room on the left if you enter from the west entrance.",
+      "original": "4701 s cham"
+    },
+    "meetingTime": "07:00 PM",
+    "unitLeader": {
+      "fname": "Steve",
+      "lname": "Lloyd",
+      "phone": "7203343340",
+      "email": "lloyds131@gmail.com",
+      "involvement": "non-member"
+    },
+    "adultRepresentative": {
+      "fname": "",
+      "lname": "",
+      "phone": "",
+      "email": ""
+    },
+    "youthRepresentative": {
+      "fname": "",
+      "lname": "",
+      "phone": "",
+      "email": ""
+    },
+    "__v": 0
+  }
+]

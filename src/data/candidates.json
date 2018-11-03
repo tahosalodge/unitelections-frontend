@@ -1,0 +1,67 @@
+[{
+    "_id": "5ac11a258f31c8e5e402eaf2",
+    "fname": "Maxine",
+    "lname": "McKernan",
+    "dob": "2017-03-12T07:00:00.000Z",
+    "bsaid": "098234091",
+    "rank": "eagle",
+    "electionId": "5ac119a18f31c8e5e402eaf1",
+    "address": {
+      "address1": "8051 Parkland St #110",
+      "city": "Broomfield",
+      "state": "CO",
+      "zip": "80021"
+    },
+    "parentPhone": "3037480249",
+    "parentEmail": "kevin@mckernan.in",
+    "campingLongTerm": "10",
+    "campingShortTerm": "10",
+    "chapter": "spirit-eagle",
+    "status": "Elected",
+    "unitId": "5abfc77d0eeed3caa145e794",
+    "__v": 0,
+    "exported": "2018-04-21T19:12:21.688Z"
+  },
+  {
+    "_id": "5aedd49f157eec901df65c60",
+    "address": {
+      "address1": "5307 Bristol St",
+      "city": "Arvada",
+      "state": "CO",
+      "zip": "80002-1624"
+    },
+    "electionId": "5aa417aa54e4a1cb6df73efa",
+    "chapter": "kodiak",
+    "status": "Eligible",
+    "unitId": "5aa3ffa6d49dbe0bf4334f7c",
+    "fname": "Cooper",
+    "lname": "Best",
+    "dob": "2004-11-03T07:00:00.000Z",
+    "bsaid": "126343317",
+    "parentPhone": "303 300-3406",
+    "parentEmail": "bestfamilyco@gmail.com",
+    "rank": "star",
+    "__v": 0
+  },
+  {
+    "_id": "5aedd49f157eec901df65c61",
+    "address": {
+      "address1": "5553 Devils Head Cir",
+      "city": "Golden",
+      "state": "CO",
+      "zip": "80403-2068"
+    },
+    "electionId": "5aa417aa54e4a1cb6df73efa",
+    "chapter": "kodiak",
+    "status": "Eligible",
+    "unitId": "5aa3ffa6d49dbe0bf4334f7c",
+    "fname": "Connor",
+    "lname": "Chase",
+    "dob": "2004-07-02T06:00:00.000Z",
+    "bsaid": "126340075",
+    "parentPhone": "303 216-1084",
+    "parentEmail": "garychase3@msn.com",
+    "rank": "life",
+    "__v": 0
+  }
+]

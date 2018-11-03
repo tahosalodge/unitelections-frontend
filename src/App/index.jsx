@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,10 +8,6 @@ import Routes from './Routes';
 import styles from './styles';
 
 class App extends React.Component {
-  static propTypes = {
-    classes: PropTypes.shape({}).isRequired,
-  };
-
   state = {
     open: false,
   };

@@ -1,0 +1,27 @@
+[{
+    "_id": "5aa40c72035fff5fd47acfae",
+    "requestedDates": ["2018-3-12", "2018-3-12", "2018-3-12"],
+    "unitId": "5aa37fcd19227b2dfccf4536",
+    "status": "Scheduled",
+    "season": "2018",
+    "__v": 0,
+    "date": "2018-03-12T18:00:00.000Z"
+  },
+  {
+    "_id": "5aa40c9b035fff5fd47acfaf",
+    "requestedDates": ["2018-02-27T19:00:00.000Z", "2018-02-27T07:00:00.000Z", "2018-02-27T07:00:00.000Z"],
+    "unitId": "5aa37ffb19227b2dfccf453c",
+    "status": "Requested",
+    "season": "2018",
+    "__v": 0
+  },
+  {
+    "_id": "5aa40e8b035fff5fd47acfb0",
+    "requestedDates": ["2018-1-30", "2018-1-30", "2018-1-30"],
+    "unitId": "5aa3800819227b2dfccf4540",
+    "status": "Scheduled",
+    "season": "2018",
+    "__v": 0,
+    "date": "2018-01-30T07:00:00.000Z"
+  }
+]

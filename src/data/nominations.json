@@ -1,0 +1,23 @@
+[{
+  "_id": "5ac5a36ee58612a3baf86e12",
+  "fname": "Erica",
+  "lname": "McKernan",
+  "dob": "1994-03-07T07:00:00.000Z",
+  "bsaid": "0982134098",
+  "electionId": "5ac119a18f31c8e5e402eaf1",
+  "address": {
+    "address1": "8051 Parkland St #110",
+    "city": "Broomfield",
+    "state": "CO",
+    "zip": "80021"
+  },
+  "phone": "3037468912",
+  "email": "erica@mckernan.in",
+  "campingLongTerm": "10",
+  "campingShortTerm": "10",
+  "chapter": "spirit-eagle",
+  "status": "Approved",
+  "type": "unit",
+  "position": "Mom",
+  "__v": 0
+}]

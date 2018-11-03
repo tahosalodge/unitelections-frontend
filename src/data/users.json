@@ -1,0 +1,22 @@
+[{
+    "_id": "5aa37f4e2539c327f65aaec9",
+    "capability": "admin",
+    "email": "kevin@mckernan.in",
+    "fname": "Kevin",
+    "lname": "McKernan",
+    "chapter": "medicine-bear",
+    "password": "$2a$08$M17iz3koMij8UO8oo0IyFe6cXYCEfXsbJyR1hPyH6ohCT/n2ySGaK",
+    "__v": 0
+  },
+  {
+    "_id": "5aa37fcd19227b2dfccf4537",
+    "capability": "unit",
+    "fname": "Bob",
+    "lname": "Willman",
+    "email": "b.willman@comcast.net",
+    "chapter": "white-eagle",
+    "password": "$2a$08$eR0DI4/TYtUPL/s7R9CyM.FjJPNhjkfwibRwDfQoOQLyr5VptXu4e",
+    "__v": 0,
+    "unit": "5aa37fcd19227b2dfccf4536"
+  }
+]

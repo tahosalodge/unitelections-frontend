@@ -24,17 +24,12 @@ const Header = ({ classes, open, handleOpen }) => (
       >
         <MenuIcon />
       </IconButton>
-      <Typography
-        variant="title"
-        color="inherit"
-        noWrap
-        className={classes.title}
-      >
+      <Typography variant="h6" color="inherit" noWrap className={classes.title}>
         Dashboard
       </Typography>
       {/* {auth.loggedIn && (
         <Fragment>
-          <Typography variant="subheading" color="inherit">
+          <Typography variant="subtitle1" color="inherit">
             {`Welcome ${auth.user.fname}`}
           </Typography>
           <IconButton color="inherit">
@@ -52,7 +47,7 @@ Header.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   open: PropTypes.bool.isRequired,
   handleOpen: PropTypes.func.isRequired,
-  auth: PropTypes.shape({}).isRequired,
+  // auth: PropTypes.shape({}).isRequired,
 };
 
 export default Header;

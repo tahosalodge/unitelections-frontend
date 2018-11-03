@@ -14,13 +14,13 @@ const styles = theme => ({
 
 const Page = ({ children, classes, title }) => (
   <Paper className={classes.root}>
-    {title && <Typography variant="display1">{title}</Typography>}
+    {title && <Typography variant="h4">{title}</Typography>}
     <Fragment>{children}</Fragment>
   </Paper>
 );
 
 Page.propTypes = {
-  children: PropTypes.number.isRequired,
+  children: PropTypes.node.isRequired,
   classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string,
 };
