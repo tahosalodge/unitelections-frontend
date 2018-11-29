@@ -8,24 +8,18 @@ import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
 
 const Header = ({ classes, open, handleOpen }) => (
-  <AppBar
-    position="absolute"
-    className={classNames(classes.appBar, open && classes.appBarShift)}
-  >
+  <AppBar position="absolute" className={classNames(classes.appBar)}>
     <Toolbar disableGutters={!open} className={classes.toolbar}>
       <IconButton
         color="inherit"
         aria-label="Open drawer"
         onClick={handleOpen}
-        className={classNames(
-          classes.menuButton,
-          open && classes.menuButtonHidden
-        )}
+        className={classNames(classes.menuButton)}
       >
         <MenuIcon />
       </IconButton>
       <Typography variant="h6" color="inherit" noWrap className={classes.title}>
-        Dashboard
+        Tahosa Lodge Elections
       </Typography>
       {/* {auth.loggedIn && (
         <Fragment>

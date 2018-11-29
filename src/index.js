@@ -9,6 +9,7 @@ import DateFnsUtils from 'material-ui-pickers/utils/date-fns-utils';
 
 // import createStore from 'state';
 import App from './App';
+import 'index.css';
 
 // const store = createStore();
 

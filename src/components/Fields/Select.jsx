@@ -23,7 +23,9 @@ const SelectField = ({ options, label, className, ...props }) => (
         >
           <option value="" />
           {options.map(option => (
-            <option value={option.value}>{option.label}</option>
+            <option key={option.value} value={option.value}>
+              {option.label}
+            </option>
           ))}
         </Select>
         {(errors[field.name] || props.helperText) && (
