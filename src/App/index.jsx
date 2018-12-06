@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Header from 'components/Header';
 import Navigation from 'components/Navigation';
+import Notifications from 'components/Notifications';
 import Routes from './Routes';
 import styles from './styles';
 
@@ -13,6 +14,8 @@ class App extends React.Component {
   };
 
   toggleDrawer = () => this.setState(prev => ({ open: !prev.open }));
+
+  closeDrawer = () => this.setState({ open: false });
 
   render() {
     const { classes } = this.props;
@@ -30,7 +33,7 @@ class App extends React.Component {
           <Navigation
             classes={classes}
             open={open}
-            handleClose={this.toggleDrawer}
+            handleClose={this.closeDrawer}
           />
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
@@ -38,6 +41,7 @@ class App extends React.Component {
               <Routes />
             </div>
           </main>
+          <Notifications />
         </div>
       </Fragment>
     );

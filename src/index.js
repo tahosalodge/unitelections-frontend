@@ -1,20 +1,22 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import ReactDOM from 'react-dom';
-// import { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import DateFnsUtils from 'material-ui-pickers/utils/date-fns-utils';
+import { SnackbarProvider } from 'notistack';
 
-// import createStore from 'state';
+import createStore from 'state';
 import App from './App';
 import 'index.css';
 
-// const store = createStore();
+const store = createStore();
 
 const theme = createMuiTheme({
   palette: {
+    // type: 'dark',
     primary: {
       main: '#E31837',
     },
@@ -29,12 +31,14 @@ const theme = createMuiTheme({
 
 const Root = () => (
   <MuiPickersUtilsProvider utils={DateFnsUtils}>
-    {/* <Provider store={store}> */}
-    <MuiThemeProvider theme={theme}>
-      <CssBaseline />
-      <App />
-    </MuiThemeProvider>
-    {/* </Provider> */}
+    <Provider store={store}>
+      <SnackbarProvider>
+        <MuiThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </MuiThemeProvider>
+      </SnackbarProvider>
+    </Provider>
   </MuiPickersUtilsProvider>
 );
 

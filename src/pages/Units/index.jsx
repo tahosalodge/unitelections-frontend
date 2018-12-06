@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Page from 'components/Page';
 import Table from 'components/Table';
-import data from 'data/units';
+import { listUnits } from 'state/modules/unit';
 
 const columns = [
   {
@@ -22,10 +23,26 @@ const columns = [
   },
 ];
 
-const Units = () => (
-  <Page title="Units">
-    <Table data={data} columns={columns} />
-  </Page>
-);
+class Units extends React.Component {
+  componentDidMount() {
+    this.props.listUnits();
+  }
 
-export default Units;
+  render() {
+    const { units } = this.props;
+    return (
+      <Page title="Units">
+        <Table data={units} columns={columns} />
+      </Page>
+    );
+  }
+}
+
+const mapStateToProps = state => ({
+  units: Object.values(state.unit.items),
+});
+
+export default connect(
+  mapStateToProps,
+  { listUnits }
+)(Units);

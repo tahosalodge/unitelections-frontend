@@ -7,7 +7,7 @@ import AppsIcon from '@material-ui/icons/Apps';
 import FingerprintIcon from '@material-ui/icons/Fingerprint';
 import NavigationItem from './Item';
 
-const Navigation = ({ classes, open }) => (
+const Navigation = ({ classes, open, handleClose }) => (
   <Drawer
     variant="permanent"
     classes={{
@@ -16,13 +16,19 @@ const Navigation = ({ classes, open }) => (
     open={open}
   >
     <List className={classes.list}>
-      <NavigationItem className={classes.navItem} to="/" label="Home">
+      <NavigationItem
+        className={classes.navItem}
+        to="/"
+        label="Home"
+        onClick={handleClose}
+      >
         <AppsIcon />
       </NavigationItem>
       <NavigationItem
         className={classes.navItem}
         to="/elections"
         label="Elections"
+        onClick={handleClose}
       >
         <FingerprintIcon />
       </NavigationItem>
@@ -30,6 +36,7 @@ const Navigation = ({ classes, open }) => (
         className={classes.navItem}
         to="/elections/123"
         label="Election"
+        onClick={handleClose}
       >
         <FingerprintIcon />
       </NavigationItem>
@@ -37,19 +44,31 @@ const Navigation = ({ classes, open }) => (
         className={classes.navItem}
         to="/elections/new"
         label="Create Election"
+        onClick={handleClose}
       >
         <FingerprintIcon />
       </NavigationItem>
-      <NavigationItem className={classes.navItem} to="/units" label="Units">
+      <NavigationItem
+        className={classes.navItem}
+        to="/units"
+        label="Units"
+        onClick={handleClose}
+      >
         <FingerprintIcon />
       </NavigationItem>
-      <NavigationItem className={classes.navItem} to="/units/123" label="Unit">
+      <NavigationItem
+        className={classes.navItem}
+        to="/units/123"
+        label="Unit"
+        onClick={handleClose}
+      >
         <FingerprintIcon />
       </NavigationItem>
       <NavigationItem
         className={classes.navItem}
         to="/units/new"
         label="Create Unit"
+        onClick={handleClose}
       >
         <FingerprintIcon />
       </NavigationItem>
@@ -60,6 +79,7 @@ const Navigation = ({ classes, open }) => (
 Navigation.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default Navigation;

@@ -13,6 +13,10 @@ const Nomination = lazy(() => import('forms/Nomination'));
 const Report = lazy(() => import('forms/Report'));
 const UnitSteps = lazy(() => import('components/UnitSteps'));
 const Home = lazy(() => import('pages/Home'));
+const Login = lazy(() => import('components/Login'));
+const Register = lazy(() => import('components/Register'));
+const Lodges = lazy(() => import('components/Lodges'));
+const Users = lazy(() => import('components/Users'));
 
 const Routes = () => (
   <Router>
@@ -27,6 +31,10 @@ const Routes = () => (
       <Nomination path="/nomination" />
       <Report path="/report" />
       <UnitSteps path="/unit-steps" />
+      <Login path="/login" />
+      <Register path="/register" />
+      <Lodges path="/lodges" />
+      <Users path="/users" />
       <Home default />
     </Suspense>
   </Router>

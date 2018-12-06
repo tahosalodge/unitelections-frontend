@@ -6,6 +6,7 @@ import TextField from './Text';
 
 const Address = ({ label, name, classes, notes }) => (
   <Fragment>
+    <br />
     <Typography variant="body1">{label}</Typography>
     <Grid container spacing={24}>
       <Grid item xs={12}>

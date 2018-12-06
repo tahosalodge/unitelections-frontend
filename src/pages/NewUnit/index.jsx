@@ -1,11 +1,18 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import compose from 'lodash/fp/compose';
 import { Formik, Form } from 'formik';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import { createUnit } from 'state/modules/unit';
+import { getChapters } from 'selectors/auth';
+import { chapterShape } from 'shapes/auth';
 import Page from 'components/Page';
 import TextField from 'components/Fields/Text';
 import AddressField from 'components/Fields/Address';
+import RepresentativeField from 'components/Fields/Representative';
 import SelectField from 'components/Fields/Select';
 
 const styles = theme => ({
@@ -18,16 +25,27 @@ const styles = theme => ({
   },
 });
 
-const NewUnit = ({ classes }) => (
+const NewUnit = ({ classes, chapters, ...props }) => (
   <Page title="New Unit">
-    <Formik onSubmit={values => console.log(values)}>
+    <Formik onSubmit={values => props.createUnit(values)}>
       {({ handleSubmit }) => (
         <Form>
           <Grid container spacing={24}>
             <Grid item xs={12} sm={6}>
               <SelectField
+                label="District"
+                name="chapter"
+                options={chapters.map(chapter => ({
+                  label: chapter.district,
+                  value: chapter._id,
+                }))}
+                className={classes.inputs}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <SelectField
                 label="Unit Type"
-                name="type"
+                name="unitType"
                 options={[
                   { value: 'troop', label: 'Troop' },
                   { value: 'crew', label: 'Crew' },
@@ -44,7 +62,7 @@ const NewUnit = ({ classes }) => (
                 className={classes.inputs}
               />
             </Grid>
-            <Grid item xs={12}>
+            <Grid item xs={12} sm={6}>
               <TextField
                 name="activeMembers"
                 label="Active Members"
@@ -71,6 +89,14 @@ const NewUnit = ({ classes }) => (
               />
             </Grid>
             <Grid item xs={12}>
+              <RepresentativeField
+                label="Unit Leader"
+                name="unitLeader"
+                classes={classes}
+                unitLeader
+              />
+            </Grid>
+            <Grid item xs={12}>
               <Button
                 onClick={handleSubmit}
                 variant="contained"
@@ -87,4 +113,19 @@ const NewUnit = ({ classes }) => (
   </Page>
 );
 
-export default withStyles(styles)(NewUnit);
+NewUnit.propTypes = {
+  createUnit: PropTypes.func.isRequired,
+  chapters: chapterShape.isRequired,
+};
+
+const mapStateToProps = state => ({
+  chapters: getChapters(state),
+});
+
+export default compose(
+  connect(
+    mapStateToProps,
+    { createUnit }
+  ),
+  withStyles(styles)
+)(NewUnit);
