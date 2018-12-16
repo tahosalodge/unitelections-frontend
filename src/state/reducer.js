@@ -4,6 +4,7 @@ import { reducer as user } from './modules/user';
 import { reducer as notification } from './modules/notification';
 import { reducer as auth } from './modules/auth';
 import { reducer as unit } from './modules/unit';
+import { reducer as election } from './modules/election';
 
 const rootReducer = combineReducers({
   lodge,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   notification,
   auth,
   unit,
+  election,
 });
 
 export default rootReducer;

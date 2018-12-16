@@ -1,14 +1,21 @@
 import React, { Fragment } from 'react';
 import { compose } from 'redux';
+import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Header from 'components/Header';
 import Navigation from 'components/Navigation';
 import Notifications from 'components/Notifications';
+import { getAuth } from 'selectors/auth';
+import authShape from 'shapes/auth';
 import Routes from './Routes';
 import styles from './styles';
 
 class App extends React.Component {
+  static propTypes = {
+    auth: authShape.isRequired,
+  };
+
   state = {
     open: false,
   };
@@ -18,7 +25,7 @@ class App extends React.Component {
   closeDrawer = () => this.setState({ open: false });
 
   render() {
-    const { classes } = this.props;
+    const { classes, auth } = this.props;
     const { open } = this.state;
 
     return (
@@ -29,6 +36,7 @@ class App extends React.Component {
             classes={classes}
             open={open}
             handleOpen={this.toggleDrawer}
+            auth={auth}
           />
           <Navigation
             classes={classes}
@@ -48,4 +56,11 @@ class App extends React.Component {
   }
 }
 
-export default compose(withStyles(styles))(App);
+const mapStateToProps = state => ({
+  auth: getAuth(state),
+});
+
+export default compose(
+  connect(mapStateToProps),
+  withStyles(styles)
+)(App);

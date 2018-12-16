@@ -21,10 +21,10 @@ const Users = lazy(() => import('components/Users'));
 const Routes = () => (
   <Router>
     <Suspense default fallback={<CircularProgress />}>
-      <Election path="/elections/:id" />
+      <Election path="/elections/:electionId" />
       <Elections path="/elections" />
-      <NewElection path="/elections/new" />
-      <Unit path="/units/:id" />
+      <Unit path="/units/:unitId" />
+      <NewElection path="/units/:unitId/request-election" />
       <Units path="/units" />
       <NewUnit path="/units/new" />
       <Candidate path="/candidate" />

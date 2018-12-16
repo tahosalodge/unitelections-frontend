@@ -11,6 +11,7 @@ import { getChapters } from 'selectors/auth';
 import { chapterShape } from 'shapes/auth';
 import Page from 'components/Page';
 import TextField from 'components/Fields/Text';
+import TimeField from 'components/Fields/Time';
 import AddressField from 'components/Fields/Address';
 import RepresentativeField from 'components/Fields/Representative';
 import SelectField from 'components/Fields/Select';
@@ -27,7 +28,10 @@ const styles = theme => ({
 
 const NewUnit = ({ classes, chapters, ...props }) => (
   <Page title="New Unit">
-    <Formik onSubmit={values => props.createUnit(values)}>
+    <Formik
+      onSubmit={values => props.createUnit(values)}
+      initialValues={{ meetingTime: Date.now() }}
+    >
       {({ handleSubmit }) => (
         <Form>
           <Grid container spacing={24}>
@@ -35,10 +39,13 @@ const NewUnit = ({ classes, chapters, ...props }) => (
               <SelectField
                 label="District"
                 name="chapter"
-                options={chapters.map(chapter => ({
-                  label: chapter.district,
-                  value: chapter._id,
-                }))}
+                options={
+                  chapters &&
+                  chapters.map(chapter => ({
+                    label: chapter.district,
+                    value: chapter._id,
+                  }))
+                }
                 className={classes.inputs}
               />
             </Grid>
@@ -70,14 +77,11 @@ const NewUnit = ({ classes, chapters, ...props }) => (
               />
             </Grid>
             <Grid item xs={12}>
-              <TextField
-                name="meetingTime"
-                label="Meeting Time"
-                type="time"
+              <TimeField
                 className={classes.inputs}
-                InputLabelProps={{
-                  shrink: true,
-                }}
+                name="meetingTime"
+                autoOk
+                label="Meeting Time"
               />
             </Grid>
             <Grid item xs={12}>

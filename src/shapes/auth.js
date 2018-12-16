@@ -15,6 +15,8 @@ export const chapterShape = shape({
   district: string,
 });
 
+export const arrayOfChapters = arrayOf(chapterShape);
+
 export const lodgeShape = shape({
   _id: string,
   council: number,

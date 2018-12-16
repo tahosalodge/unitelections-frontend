@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from './Text';
+import SelectField from './Select';
 
 const Representative = ({ label, name, classes, unitLeader }) => (
   <Fragment>
@@ -12,7 +13,6 @@ const Representative = ({ label, name, classes, unitLeader }) => (
       <Grid item xs={12} sm={6}>
         <TextField
           autoFocus
-          margin="normal"
           name={`${name}.fname`}
           label="First Name"
           className={classes.inputs}
@@ -20,8 +20,6 @@ const Representative = ({ label, name, classes, unitLeader }) => (
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          autoFocus
-          margin="normal"
           name={`${name}.lname`}
           label="Last Name"
           className={classes.inputs}
@@ -29,8 +27,6 @@ const Representative = ({ label, name, classes, unitLeader }) => (
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          autoFocus
-          margin="normal"
           name={`${name}.phone`}
           label="Phone"
           className={classes.inputs}
@@ -38,8 +34,6 @@ const Representative = ({ label, name, classes, unitLeader }) => (
       </Grid>
       <Grid item xs={12} sm={6}>
         <TextField
-          autoFocus
-          margin="normal"
           name={`${name}.email`}
           label="Email Address"
           className={classes.inputs}
@@ -48,21 +42,16 @@ const Representative = ({ label, name, classes, unitLeader }) => (
       {unitLeader && (
         <Fragment>
           <Grid item xs={12} sm={6}>
-            <TextField
-              autoFocus
-              margin="normal"
-              name={`${name}.involvement`}
-              label="Involvement"
-              className={classes.inputs}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              autoFocus
-              margin="normal"
+            <SelectField
               name={`${name}.position`}
               label="Leadership Position"
               className={classes.inputs}
+              options={[
+                'Scoutmaster',
+                'Assistant Scoutmaster',
+                'Committee Member',
+                'Advancement Chair',
+              ]}
             />
           </Grid>
         </Fragment>

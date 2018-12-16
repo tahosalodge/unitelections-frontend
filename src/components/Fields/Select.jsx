@@ -22,11 +22,18 @@ const SelectField = ({ options, label, className, ...props }) => (
           disabled={disabled}
         >
           <option value="" />
-          {options.map(option => (
-            <option key={option.value} value={option.value}>
-              {option.label}
-            </option>
-          ))}
+          {options.map(
+            option =>
+              typeof option === 'string' ? (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ) : (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              )
+          )}
         </Select>
         {(errors[field.name] || props.helperText) && (
           <FormHelperText>

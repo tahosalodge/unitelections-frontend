@@ -9,6 +9,8 @@ const createReducer = (actions, initialState) => (
     case actions.list.success:
       return mergeState(state, payload);
     case actions.create.success:
+    case actions.get.success:
+    case actions.update.success:
       return insertToState(state, payload.item);
     case actions.delete.success:
       return removeFromState(state, payload.id);

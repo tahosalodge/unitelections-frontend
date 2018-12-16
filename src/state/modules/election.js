@@ -5,7 +5,7 @@ import apiRequest from 'utils/apiRequest';
 import normalize from 'utils/normalize';
 import { addNotification } from 'state/modules/notification';
 
-export const actions = createActions('UNIT');
+export const actions = createActions('ELECTION');
 
 const initialState = {
   items: {},
@@ -13,15 +13,18 @@ const initialState = {
 
 export const reducer = createReducer(actions, initialState);
 
-export const createUnit = payload => ({
+export const createElection = (payload, unitId) => ({
   type: actions.create.request,
-  payload,
+  payload: {
+    ...payload,
+    unitId,
+  },
 });
 
-const createSuccess = unit => ({
+const createSuccess = election => ({
   type: actions.create.success,
   payload: {
-    item: unit,
+    item: election,
   },
 });
 
@@ -32,14 +35,14 @@ const createFailure = error => ({
   },
 });
 
-export const listUnits = () => ({
+export const listElections = () => ({
   type: actions.list.request,
 });
 
-const listSuccess = units => ({
+const listSuccess = elections => ({
   type: actions.list.success,
   payload: {
-    items: normalize(units, '_id'),
+    items: normalize(elections, '_id'),
   },
 });
 
@@ -50,17 +53,17 @@ const listFailure = error => ({
   },
 });
 
-export const getUnit = unitId => ({
+export const getElection = electionId => ({
   type: actions.get.request,
   payload: {
-    unitId,
+    electionId,
   },
 });
 
-const getSuccess = unit => ({
+const getSuccess = election => ({
   type: actions.get.success,
   payload: {
-    item: unit,
+    item: election,
   },
 });
 
@@ -71,15 +74,15 @@ const getFailure = error => ({
   },
 });
 
-export const updateUnit = payload => ({
+export const updateElection = payload => ({
   type: actions.update.request,
   payload,
 });
 
-const updateSuccess = unit => ({
+const updateSuccess = election => ({
   type: actions.update.success,
   payload: {
-    item: unit,
+    item: election,
   },
 });
 
@@ -90,7 +93,7 @@ const updateFailure = error => ({
   },
 });
 
-export const deleteUnit = id => ({
+export const deleteElection = id => ({
   type: actions.delete.request,
   payload: { id },
 });
@@ -111,8 +114,10 @@ const deleteFailure = error => ({
 
 function* create({ payload }) {
   try {
-    const { unit } = yield call(apiRequest, '/v1/unit', 'POST', payload);
-    yield put(createSuccess(unit));
+    const { election } = yield call(apiRequest, '/v1/election', 'POST', {
+      ...payload,
+    });
+    yield put(createSuccess(election));
   } catch (error) {
     yield put(createFailure(error));
     yield put(
@@ -126,10 +131,10 @@ function* create({ payload }) {
   }
 }
 
-function* get({ payload: { unitId } }) {
+function* get({ payload: { electionId } }) {
   try {
-    const { unit } = yield call(apiRequest, `/v1/unit/${unitId}`);
-    yield put(getSuccess(unit));
+    const { election } = yield call(apiRequest, `/v1/election/${electionId}`);
+    yield put(getSuccess(election));
   } catch (error) {
     yield put(getFailure(error));
     yield put(
@@ -145,8 +150,13 @@ function* get({ payload: { unitId } }) {
 
 function* update({ payload: { id, patch } }) {
   try {
-    const { unit } = yield call(apiRequest, `/v1/unit/${id}`, 'PATCH', patch);
-    yield put(updateSuccess(unit));
+    const { election } = yield call(
+      apiRequest,
+      `/v1/election/${id}`,
+      'PATCH',
+      patch
+    );
+    yield put(updateSuccess(election));
   } catch (error) {
     yield put(updateFailure(error));
     yield put(
@@ -162,7 +172,7 @@ function* update({ payload: { id, patch } }) {
 
 function* remove({ payload: { id } }) {
   try {
-    yield call(apiRequest, `/v1/unit/${id}`, 'DELETE');
+    yield call(apiRequest, `/v1/election/${id}`, 'DELETE');
     yield put(deleteSuccess(id));
   } catch (error) {
     yield put(deleteFailure(error));
@@ -179,8 +189,8 @@ function* remove({ payload: { id } }) {
 
 function* list() {
   try {
-    const { units } = yield call(apiRequest, '/v1/unit');
-    yield put(listSuccess(units));
+    const { elections } = yield call(apiRequest, '/v1/election');
+    yield put(listSuccess(elections));
   } catch (error) {
     yield put(listFailure(error));
     yield put(

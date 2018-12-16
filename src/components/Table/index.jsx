@@ -12,31 +12,38 @@ const styles = () => ({
   table: {
     minWidth: 700,
   },
+  wrapper: {
+    maxWidth: '100%',
+    overflowX: 'scroll',
+  },
 });
 
 const CustomTable = ({ classes, data, columns }) => (
-  <Table className={classes.table}>
-    <TableHead>
-      <TableRow>
-        {columns.map(column => (
-          <TableCell key={column.title}>{column.title}</TableCell>
-        ))}
-      </TableRow>
-    </TableHead>
-    <TableBody>
-      {data.map(row => (
-        <TableRow key={row._id}>
+  <div className={classes.wrapper}>
+    <Table className={classes.table}>
+      <TableHead>
+        <TableRow>
           {columns.map(column => (
-            <CustomCell
-              key={`${row._id}-${column.title}`}
-              column={column}
-              row={row}
-            />
+            <TableCell key={column.title}>{column.title}</TableCell>
           ))}
         </TableRow>
-      ))}
-    </TableBody>
-  </Table>
+      </TableHead>
+      <TableBody>
+        {data.length > 0 &&
+          data.map(row => (
+            <TableRow key={row._id}>
+              {columns.map(column => (
+                <CustomCell
+                  key={`${row._id}-${column.title}`}
+                  column={column}
+                  row={row}
+                />
+              ))}
+            </TableRow>
+          ))}
+      </TableBody>
+    </Table>
+  </div>
 );
 
 CustomTable.propTypes = {

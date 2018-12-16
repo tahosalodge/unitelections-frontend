@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
-import AppsIcon from '@material-ui/icons/Apps';
-import FingerprintIcon from '@material-ui/icons/Fingerprint';
+import GroupIcon from '@material-ui/icons/Group';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import NavigationItem from './Item';
 
 const Navigation = ({ classes, open, handleClose }) => (
@@ -18,35 +18,11 @@ const Navigation = ({ classes, open, handleClose }) => (
     <List className={classes.list}>
       <NavigationItem
         className={classes.navItem}
-        to="/"
-        label="Home"
-        onClick={handleClose}
-      >
-        <AppsIcon />
-      </NavigationItem>
-      <NavigationItem
-        className={classes.navItem}
         to="/elections"
         label="Elections"
         onClick={handleClose}
       >
-        <FingerprintIcon />
-      </NavigationItem>
-      <NavigationItem
-        className={classes.navItem}
-        to="/elections/123"
-        label="Election"
-        onClick={handleClose}
-      >
-        <FingerprintIcon />
-      </NavigationItem>
-      <NavigationItem
-        className={classes.navItem}
-        to="/elections/new"
-        label="Create Election"
-        onClick={handleClose}
-      >
-        <FingerprintIcon />
+        <PersonAddIcon />
       </NavigationItem>
       <NavigationItem
         className={classes.navItem}
@@ -54,23 +30,7 @@ const Navigation = ({ classes, open, handleClose }) => (
         label="Units"
         onClick={handleClose}
       >
-        <FingerprintIcon />
-      </NavigationItem>
-      <NavigationItem
-        className={classes.navItem}
-        to="/units/123"
-        label="Unit"
-        onClick={handleClose}
-      >
-        <FingerprintIcon />
-      </NavigationItem>
-      <NavigationItem
-        className={classes.navItem}
-        to="/units/new"
-        label="Create Unit"
-        onClick={handleClose}
-      >
-        <FingerprintIcon />
+        <GroupIcon />
       </NavigationItem>
     </List>
   </Drawer>

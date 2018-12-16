@@ -1,4 +1,5 @@
 import React from 'react';
+// import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -43,7 +44,7 @@ function getStepContent(step) {
   }
 }
 
-class HorizontalLinearStepper extends React.Component {
+class UnitSteps extends React.Component {
   state = {
     activeStep: 0,
     skipped: new Set(),
@@ -174,4 +175,4 @@ class HorizontalLinearStepper extends React.Component {
   }
 }
 
-export default withStyles(styles)(HorizontalLinearStepper);
+export default withStyles(styles)(UnitSteps);

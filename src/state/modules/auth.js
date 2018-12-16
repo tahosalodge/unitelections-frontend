@@ -89,7 +89,7 @@ function* registerSaga({ payload }) {
       'POST',
       payload
     );
-    localStorage.setItem('token', response.token);
+    localStorage.setItem('token', response.user.token);
     yield put(loginSuccess(response));
   } catch (error) {
     yield put(registerFailure(error));
@@ -107,7 +107,7 @@ function* registerSaga({ payload }) {
 function* loginSaga({ payload }) {
   try {
     const response = yield call(apiRequest, '/v1/user/login', 'POST', payload);
-    localStorage.setItem('token', response.token);
+    localStorage.setItem('token', response.user.token);
     yield put(loginSuccess(response));
   } catch (error) {
     yield put(loginFailure(error));

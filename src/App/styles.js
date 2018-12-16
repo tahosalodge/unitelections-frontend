@@ -20,6 +20,7 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    paddingRight: '1em',
   },
   menuButton: {
     marginLeft: 12,
