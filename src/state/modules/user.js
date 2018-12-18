@@ -1,4 +1,5 @@
 import { put, call, takeLatest } from 'redux-saga/effects';
+import history from 'utils/history';
 import createActions from 'utils/createAction';
 import createReducer from 'utils/createReducer';
 import apiRequest from 'utils/apiRequest';
@@ -112,6 +113,7 @@ function* create({ payload }) {
   try {
     const { users } = yield call(apiRequest, '/v1/user', 'PUT', payload);
     yield put(createSuccess(users));
+    history.navigate('/units');
   } catch (error) {
     yield put(createFailure(error));
   }

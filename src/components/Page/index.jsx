@@ -11,6 +11,9 @@ const styles = theme => ({
     paddingBottom: theme.spacing.unit * 2,
     margin: 'auto',
     maxWidth: theme.spacing.unit * 100,
+    [theme.breakpoints.down('md')]: {
+      maxWidth: '100%',
+    },
   },
   title: {
     textTransform: 'capitalize',

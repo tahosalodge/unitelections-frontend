@@ -4,6 +4,7 @@ import createReducer from 'utils/createReducer';
 import apiRequest from 'utils/apiRequest';
 import normalize from 'utils/normalize';
 import { addNotification } from 'state/modules/notification';
+import history from 'utils/history';
 
 export const actions = createActions('ELECTION');
 
@@ -118,6 +119,7 @@ function* create({ payload }) {
       ...payload,
     });
     yield put(createSuccess(election));
+    history.navigate(`/units/${election.unitId}`);
   } catch (error) {
     yield put(createFailure(error));
     yield put(

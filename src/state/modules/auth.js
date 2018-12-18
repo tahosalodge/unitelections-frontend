@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import apiRequest from 'utils/apiRequest';
 import { addNotification } from 'state/modules/notification';
+import history from 'utils/history';
 
 const initialState = {
   loggedIn: false,
@@ -139,11 +140,19 @@ function* checkToken() {
   } catch (error) {
     yield put(loginFailure(error.message));
     if (error.code !== 'NETWORK') {
-      // localStorage.removeItem('token');
+      localStorage.removeItem('token');
     }
-    // if (pathname.indexOf('register') === -1 && pathname !== '/') {
-    //   yield put(push('/login'));
-    // }
+    if (pathname.indexOf('register') === -1 && pathname !== '/') {
+      history.navigate('/login');
+    }
+  }
+}
+
+function* logoutSaga() {
+  try {
+    yield localStorage.removeItem('token');
+  } catch (error) {
+    console.error(error);
   }
 }
 
@@ -151,4 +160,5 @@ export function* saga() {
   yield checkToken();
   yield takeLatest(actions.register.request, registerSaga);
   yield takeLatest(actions.login.request, loginSaga);
+  yield takeLatest(actions.logout, logoutSaga);
 }

@@ -1,23 +1,29 @@
 module.exports = {
-    parser: "babel-eslint",
-    extends: ["airbnb", "plugin:prettier/recommended"],
-    env: {
-        browser: true,
+  parser: 'babel-eslint',
+  extends: ['airbnb', 'plugin:prettier/recommended'],
+  env: {
+    browser: true,
+  },
+  rules: {
+    'react/destructuring-assignment': 0,
+    'no-underscore-dangle': [
+      'error',
+      {
+        allow: ['_id'],
+      },
+    ],
+    'react/prop-types': [
+      'error',
+      {
+        ignore: ['classes', 'loading'],
+      },
+    ],
+  },
+  settings: {
+    'import/resolver': {
+      node: {
+        moduleDirectory: ['src/', 'node_modules/'],
+      },
     },
-    rules: {
-        'react/destructuring-assignment': 0,
-        'no-underscore-dangle': ["error", {
-            "allow": ["_id"]
-        }],
-        'react/prop-types': ["error", {
-            'ignore': ['classes']
-        }]
-    },
-    settings: {
-        'import/resolver': {
-            node: {
-                moduleDirectory: ['src/', 'node_modules/'],
-            },
-        },
-    },
+  },
 };

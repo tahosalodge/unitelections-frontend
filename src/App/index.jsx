@@ -42,6 +42,7 @@ class App extends React.Component {
             classes={classes}
             open={open}
             handleClose={this.closeDrawer}
+            auth={auth}
           />
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />

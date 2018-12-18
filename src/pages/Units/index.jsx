@@ -52,10 +52,6 @@ class Units extends React.Component {
         this.props.chapters.find(c => c._id === chapter).name,
     },
     {
-      title: 'Unit Leader',
-      render: ({ unitLeader: { fname, lname } }) => `${fname} ${lname}`,
-    },
-    {
       title: 'Location',
       render: ({ meetingLocation }) => (
         <a

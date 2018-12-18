@@ -2,13 +2,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { LocationProvider } from '@reach/router';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
-import DateFnsUtils from 'material-ui-pickers/utils/date-fns-utils';
+import DateFnsUtils from '@date-io/date-fns';
 import { SnackbarProvider } from 'notistack';
 
 import createStore from 'state';
+import history from 'utils/history';
 import App from './App';
 import 'index.css';
 
@@ -30,16 +32,18 @@ const theme = createMuiTheme({
 });
 
 const Root = () => (
-  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-    <Provider store={store}>
-      <SnackbarProvider>
-        <MuiThemeProvider theme={theme}>
-          <CssBaseline />
-          <App />
-        </MuiThemeProvider>
-      </SnackbarProvider>
-    </Provider>
-  </MuiPickersUtilsProvider>
+  <LocationProvider history={history}>
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <Provider store={store}>
+        <SnackbarProvider>
+          <MuiThemeProvider theme={theme}>
+            <CssBaseline />
+            <App />
+          </MuiThemeProvider>
+        </SnackbarProvider>
+      </Provider>
+    </MuiPickersUtilsProvider>
+  </LocationProvider>
 );
 
 ReactDOM.render(<Root />, document.getElementById('root'));

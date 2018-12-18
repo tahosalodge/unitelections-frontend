@@ -1,6 +1,8 @@
 import React, { Suspense, lazy } from 'react';
 import { Router } from '@reach/router';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Logout from 'components/Logout';
+import Login from 'components/Login';
 
 const Election = lazy(() => import('pages/Election'));
 const Elections = lazy(() => import('pages/Elections'));
@@ -13,7 +15,6 @@ const Nomination = lazy(() => import('forms/Nomination'));
 const Report = lazy(() => import('forms/Report'));
 const UnitSteps = lazy(() => import('components/UnitSteps'));
 const Home = lazy(() => import('pages/Home'));
-const Login = lazy(() => import('components/Login'));
 const Register = lazy(() => import('components/Register'));
 const Lodges = lazy(() => import('components/Lodges'));
 const Users = lazy(() => import('components/Users'));
@@ -35,6 +36,7 @@ const Routes = () => (
       <Register path="/register" />
       <Lodges path="/lodges" />
       <Users path="/users" />
+      <Logout path="/logout" />
       <Home default />
     </Suspense>
   </Router>
