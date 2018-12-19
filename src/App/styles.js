@@ -39,6 +39,7 @@ const styles = theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     [theme.breakpoints.down('sm')]: {
+      display: 'flex',
       width: '100vw',
     },
   },
@@ -51,6 +52,7 @@ const styles = theme => ({
     width: theme.spacing.unit * 9,
     [theme.breakpoints.down('sm')]: {
       width: 0,
+      display: 'none',
     },
   },
   appBarSpacer: theme.mixins.toolbar,

@@ -114,7 +114,7 @@ function* create({ payload }) {
   try {
     const { unit } = yield call(apiRequest, '/v1/unit', 'POST', payload);
     yield put(createSuccess(unit));
-    history.navigate(`/unit/${unit._id}/request-election`);
+    history.navigate(`/units/${unit._id}/request-election`);
   } catch (error) {
     yield put(createFailure(error));
     yield put(

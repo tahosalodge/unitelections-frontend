@@ -16,7 +16,7 @@ const styles = {
   },
 };
 
-const SimpleDialog = ({
+const UnitActions = ({
   classes,
   onClose,
   selectedValue,
@@ -26,11 +26,11 @@ const SimpleDialog = ({
 }) => (
   <Dialog
     onClose={onClose}
-    aria-labelledby="simple-dialog-title"
+    aria-labelledby="unit-actions-title"
     open={!!unitId || false}
     {...other}
   >
-    <DialogTitle id="simple-dialog-title">Unit Actions</DialogTitle>
+    <DialogTitle id="unit-actions-title">Unit Actions</DialogTitle>
     <div>
       <List>
         <ListItem
@@ -54,11 +54,9 @@ const SimpleDialog = ({
   </Dialog>
 );
 
-SimpleDialog.propTypes = {
-  // eslint-disable-next-line
-  classes: PropTypes.object.isRequired,
+UnitActions.propTypes = {
   onClose: PropTypes.func.isRequired,
   userId: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(SimpleDialog);
+export default withStyles(styles)(UnitActions);

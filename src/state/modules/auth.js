@@ -92,6 +92,7 @@ function* registerSaga({ payload }) {
     );
     localStorage.setItem('token', response.user.token);
     yield put(loginSuccess(response));
+    history.navigate('/units');
   } catch (error) {
     yield put(registerFailure(error));
     yield put(

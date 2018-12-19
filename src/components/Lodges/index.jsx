@@ -13,7 +13,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
 import Chip from '@material-ui/core/Chip';
-import Button from '@material-ui/core/Button';
+import FloatingActionButton from '@material-ui/core/Fab';
 import { listLodges, deleteLodge } from 'state/modules/lodge';
 import { getLodges } from 'selectors/lodge';
 import { arrayOfLodges } from 'shapes/lodge';
@@ -110,14 +110,13 @@ class Lodges extends Component {
           </TableBody>
         </Table>
         <CreateLodge open={showCreateModal} handleClose={this.toggleCreate} />
-        <Button
-          variant="fab"
+        <FloatingActionButton
           className={classes.fab}
           color="secondary"
           onClick={this.toggleCreate}
         >
           <AddIcon />
-        </Button>
+        </FloatingActionButton>
       </Paper>
     );
   }

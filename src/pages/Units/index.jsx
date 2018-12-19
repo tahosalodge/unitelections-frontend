@@ -4,7 +4,7 @@ import compose from 'lodash/fp/compose';
 import { connect } from 'react-redux';
 import { Link } from '@reach/router';
 import IconButton from '@material-ui/core/IconButton';
-import Button from '@material-ui/core/Button';
+import FloatingActionButton from '@material-ui/core/Fab';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import LocationIcon from '@material-ui/icons/MyLocation';
 import AddIcon from '@material-ui/icons/Add';
@@ -92,15 +92,14 @@ class Units extends React.Component {
           onClose={this.closeActions}
           // deleteLodge={this.props.deleteLodge}
         />
-        <Button
-          variant="fab"
+        <FloatingActionButton
           className={classes.fab}
           color="secondary"
           component={Link}
           to="/units/new"
         >
           <AddIcon />
-        </Button>
+        </FloatingActionButton>
       </Page>
     );
   }

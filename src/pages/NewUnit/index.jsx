@@ -53,11 +53,7 @@ const NewUnit = ({ classes, chapters, ...props }) => (
               <SelectField
                 label="Unit Type"
                 name="unitType"
-                options={[
-                  { value: 'troop', label: 'Troop' },
-                  { value: 'crew', label: 'Crew' },
-                  { value: 'ship', label: 'Ship' },
-                ]}
+                options={['Troop', 'Crew', 'Ship']}
                 className={classes.inputs}
               />
             </Grid>
