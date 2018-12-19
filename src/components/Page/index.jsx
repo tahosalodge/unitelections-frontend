@@ -9,12 +9,25 @@ const styles = theme => ({
     ...theme.mixins.gutters(),
     paddingTop: theme.spacing.unit * 2,
     paddingBottom: theme.spacing.unit * 2,
+    margin: 'auto',
+    maxWidth: theme.spacing.unit * 100,
+    [theme.breakpoints.down('md')]: {
+      maxWidth: '100%',
+    },
+  },
+  title: {
+    textTransform: 'capitalize',
+    marginBottom: theme.spacing.unit * 1,
   },
 });
 
 const Page = ({ children, classes, title }) => (
   <Paper className={classes.root}>
-    {title && <Typography variant="h4">{title}</Typography>}
+    {title && (
+      <Typography variant="h4" className={classes.title}>
+        {title}
+      </Typography>
+    )}
     <Fragment>{children}</Fragment>
   </Paper>
 );

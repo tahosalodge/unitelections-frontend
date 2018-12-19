@@ -1,6 +1,8 @@
 import React, { Suspense, lazy } from 'react';
 import { Router } from '@reach/router';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Logout from 'components/Logout';
+import Login from 'components/Login';
 
 const Election = lazy(() => import('pages/Election'));
 const Elections = lazy(() => import('pages/Elections'));
@@ -11,19 +13,31 @@ const Units = lazy(() => import('pages/Units'));
 const Candidate = lazy(() => import('forms/Candidate'));
 const Nomination = lazy(() => import('forms/Nomination'));
 const Report = lazy(() => import('forms/Report'));
+const UnitSteps = lazy(() => import('components/UnitSteps'));
+const Home = lazy(() => import('pages/Home'));
+const Register = lazy(() => import('components/Register'));
+const Lodges = lazy(() => import('components/Lodges'));
+const Users = lazy(() => import('components/Users'));
 
 const Routes = () => (
   <Router>
     <Suspense default fallback={<CircularProgress />}>
-      <Election path="/elections/:id" />
+      <Election path="/elections/:electionId" />
       <Elections path="/elections" />
-      <NewElection path="/elections/new" />
-      <Unit path="/units/:id" />
+      <Unit path="/units/:unitId" />
+      <NewElection path="/units/:unitId/request-election" />
       <Units path="/units" />
       <NewUnit path="/units/new" />
       <Candidate path="/candidate" />
       <Nomination path="/nomination" />
       <Report path="/report" />
+      <UnitSteps path="/unit-steps" />
+      <Login path="/login" />
+      <Register path="/register" />
+      <Lodges path="/lodges" />
+      <Users path="/users" />
+      <Logout path="/logout" />
+      <Home default />
     </Suspense>
   </Router>
 );

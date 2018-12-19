@@ -2,15 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Drawer from '@material-ui/core/Drawer';
-import IconButton from '@material-ui/core/IconButton';
-import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import AppsIcon from '@material-ui/icons/Apps';
-import FingerprintIcon from '@material-ui/icons/Fingerprint';
-import NavigationItem from './Item';
+import GroupIcon from '@material-ui/icons/Group';
+import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import LockIcon from '@material-ui/icons/Lock';
 
-const Navigation = ({ classes, open, handleClose }) => (
+import NavigationItem from './Item';
+import authShape from '../../shapes/auth';
+
+const Navigation = ({ classes, open, handleClose, auth }) => (
   <Drawer
     variant="permanent"
     classes={{
@@ -18,34 +18,42 @@ const Navigation = ({ classes, open, handleClose }) => (
     }}
     open={open}
   >
-    <div className={classes.toolbarIcon}>
-      <IconButton onClick={handleClose}>
-        <ChevronLeftIcon />
-      </IconButton>
-    </div>
-    <Divider />
-    <List>
-      <NavigationItem to="/" label="Home">
-        <AppsIcon />
+    <List className={classes.list}>
+      <NavigationItem
+        className={classes.navItem}
+        to="/elections"
+        label="Elections"
+        onClick={handleClose}
+      >
+        <PersonAddIcon />
       </NavigationItem>
-      <NavigationItem to="/elections" label="Elections">
-        <FingerprintIcon />
+      <NavigationItem
+        className={classes.navItem}
+        to="/units"
+        label="Units"
+        onClick={handleClose}
+      >
+        <GroupIcon />
       </NavigationItem>
-      <NavigationItem to="/elections/123" label="Election">
-        <FingerprintIcon />
-      </NavigationItem>
-      <NavigationItem to="/elections/new" label="Create Election">
-        <FingerprintIcon />
-      </NavigationItem>
-      <NavigationItem to="/units" label="Units">
-        <FingerprintIcon />
-      </NavigationItem>
-      <NavigationItem to="/units/123" label="Unit">
-        <FingerprintIcon />
-      </NavigationItem>
-      <NavigationItem to="/units/new" label="Create Unit">
-        <FingerprintIcon />
-      </NavigationItem>
+      {auth.loggedIn ? (
+        <NavigationItem
+          className={classes.navItem}
+          to="/logout"
+          label="Log Out"
+          onClick={handleClose}
+        >
+          <LockIcon />
+        </NavigationItem>
+      ) : (
+        <NavigationItem
+          className={classes.navItem}
+          to="/login"
+          label="Log In"
+          onClick={handleClose}
+        >
+          <LockIcon />
+        </NavigationItem>
+      )}
     </List>
   </Drawer>
 );
@@ -54,6 +62,7 @@ Navigation.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   open: PropTypes.bool.isRequired,
   handleClose: PropTypes.func.isRequired,
+  auth: authShape.isRequired,
 };
 
 export default Navigation;
