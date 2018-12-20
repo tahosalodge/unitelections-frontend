@@ -37,7 +37,7 @@ class Users extends Component {
   };
 
   state = {
-    actions: false,
+    actions: '',
   };
 
   componentDidMount() {
@@ -46,7 +46,7 @@ class Users extends Component {
 
   openActions = actions => this.setState({ actions });
 
-  closeActions = () => this.setState({ actions: false });
+  closeActions = () => this.setState({ actions: '' });
 
   render() {
     const { actions } = this.state;

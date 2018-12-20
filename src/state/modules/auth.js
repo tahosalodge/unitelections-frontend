@@ -137,6 +137,7 @@ function* checkToken() {
       addNotification({ message: 'Welcome back! Logging you in now...' })
     );
     const response = yield call(apiRequest, '/v1/user/verify');
+    localStorage.setItem('token', response.user.token);
     yield put(loginSuccess(response));
   } catch (error) {
     yield put(loginFailure(error.message));

@@ -1,8 +1,8 @@
 import { shape, number, string, arrayOf } from 'prop-types';
 
 export const unitShape = shape({
-  number,
-  chapter: shape({}),
+  number: string,
+  chapter: string,
   activeMembers: number,
   meetingLocation: {
     address1: string,

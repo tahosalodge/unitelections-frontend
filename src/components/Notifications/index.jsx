@@ -1,9 +1,17 @@
 import { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withSnackbar } from 'notistack';
 import { removeNotification } from 'state/modules/notification';
 
 class Notifier extends Component {
+  static propTypes = {
+    // eslint-disable-next-line
+    notifications: PropTypes.array.isRequired,
+    enqueueSnackbar: PropTypes.func.isRequired,
+    removeNotification: PropTypes.func.isRequired,
+  };
+
   state = {
     displayed: [],
   };
@@ -15,11 +23,7 @@ class Notifier extends Component {
   };
 
   render() {
-    const {
-      notifications,
-      enqueueSnackbar: enqueueNotification,
-      removeNotification,
-    } = this.props;
+    const { notifications, enqueueSnackbar: enqueueNotification } = this.props;
     const { displayed } = this.state;
 
     notifications.forEach(notification => {
@@ -31,7 +35,7 @@ class Notifier extends Component {
         // Add notification's key to the local state
         this.storeDisplayed(notification.key);
         // Dispatch action to remove the notification from the redux store
-        removeNotification(notification.key);
+        this.props.removeNotification(notification.key);
       }, 1);
     });
 

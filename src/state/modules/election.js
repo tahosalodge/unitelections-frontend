@@ -14,11 +14,11 @@ const initialState = {
 
 export const reducer = createReducer(actions, initialState);
 
-export const createElection = (payload, unitId) => ({
+export const createElection = (payload, unit) => ({
   type: actions.create.request,
   payload: {
     ...payload,
-    unitId,
+    unit,
   },
 });
 
@@ -119,7 +119,7 @@ function* create({ payload }) {
       ...payload,
     });
     yield put(createSuccess(election));
-    history.navigate(`/units/${election.unitId}`);
+    history.navigate(`/units/${election.unit}`);
   } catch (error) {
     yield put(createFailure(error));
     yield put(

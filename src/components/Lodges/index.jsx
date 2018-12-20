@@ -50,7 +50,7 @@ class Lodges extends Component {
   };
 
   state = {
-    actions: false,
+    actions: '',
     showCreateModal: false,
   };
 
@@ -60,7 +60,7 @@ class Lodges extends Component {
 
   openActions = actions => this.setState({ actions });
 
-  closeActions = () => this.setState({ actions: false });
+  closeActions = () => this.setState({ actions: '' });
 
   toggleCreate = () =>
     this.setState(prev => ({ showCreateModal: !prev.showCreateModal }));

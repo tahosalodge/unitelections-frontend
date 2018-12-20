@@ -26,28 +26,30 @@ class Election extends React.Component {
       <Page title="Election">
         <h2>Election Overview</h2>
         <Loading loading={loading}>
-          {election && election.status === 'Requested' && (
-            <Fragment>
-              <h4>Requested Dates</h4>
-              <ul>
-                {election.requestedDates.map(reqDate => (
-                  <li key={reqDate}>
-                    {format(reqDate, 'MMMM Do, YYYY', {
-                      awareOfUnicodeTokens: true,
-                    })}
-                  </li>
-                ))}
-              </ul>
-            </Fragment>
-          )}
-          {election && election.status !== 'Requested' && (
-            <h3>
-              Date:
-              {format(election.date, 'MMMM Do, YYYY', {
-                awareOfUnicodeTokens: true,
-              })}
-            </h3>
-          )}
+          <Fragment>
+            {election && election.status === 'Requested' && (
+              <Fragment>
+                <h4>Requested Dates</h4>
+                <ul>
+                  {election.requestedDates.map(reqDate => (
+                    <li key={reqDate}>
+                      {format(reqDate, 'MMMM Do, YYYY', {
+                        awareOfUnicodeTokens: true,
+                      })}
+                    </li>
+                  ))}
+                </ul>
+              </Fragment>
+            )}
+            {election && election.status !== 'Requested' && (
+              <h3>
+                Date:
+                {format(election.date, 'MMMM Do, YYYY', {
+                  awareOfUnicodeTokens: true,
+                })}
+              </h3>
+            )}
+          </Fragment>
         </Loading>
       </Page>
     );

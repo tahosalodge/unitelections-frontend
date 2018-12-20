@@ -34,7 +34,7 @@ class Units extends React.Component {
   };
 
   state = {
-    actions: false,
+    actions: '',
   };
 
   columns = [
@@ -79,7 +79,7 @@ class Units extends React.Component {
 
   openActions = actions => this.setState({ actions });
 
-  closeActions = () => this.setState({ actions: false });
+  closeActions = () => this.setState({ actions: '' });
 
   render() {
     const { units, classes } = this.props;
@@ -87,11 +87,7 @@ class Units extends React.Component {
     return (
       <Page title="Units">
         <Table data={units} columns={this.columns} />
-        <Actions
-          unitId={actions}
-          onClose={this.closeActions}
-          // deleteLodge={this.props.deleteLodge}
-        />
+        <Actions unitId={actions} onClose={this.closeActions} />
         <FloatingActionButton
           className={classes.fab}
           color="secondary"
