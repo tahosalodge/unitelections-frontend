@@ -11,6 +11,17 @@ export const removeNotification = key => ({
   key,
 });
 
+export const errorNotification = error => ({
+  type: 'ENQUEUE_NOTIFICATION',
+  notification: {
+    key: new Date().getTime() + Math.random(),
+    message: error.message,
+    options: {
+      variant: 'error',
+    },
+  },
+});
+
 const defaultState = {
   notifications: [],
 };

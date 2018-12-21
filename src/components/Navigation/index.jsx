@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Drawer from '@material-ui/core/Drawer';
@@ -19,31 +19,45 @@ const Navigation = ({ classes, open, handleClose, auth }) => (
     open={open}
   >
     <List className={classes.list}>
-      <NavigationItem
-        className={classes.navItem}
-        to="/elections"
-        label="Elections"
-        onClick={handleClose}
-      >
-        <PersonAddIcon />
-      </NavigationItem>
-      <NavigationItem
-        className={classes.navItem}
-        to="/units"
-        label="Units"
-        onClick={handleClose}
-      >
-        <GroupIcon />
-      </NavigationItem>
       {auth.loggedIn ? (
-        <NavigationItem
-          className={classes.navItem}
-          to="/logout"
-          label="Log Out"
-          onClick={handleClose}
-        >
-          <LockIcon />
-        </NavigationItem>
+        <Fragment>
+          <NavigationItem
+            className={classes.navItem}
+            to="/elections"
+            label="Elections"
+            onClick={handleClose}
+          >
+            <PersonAddIcon />
+          </NavigationItem>
+          <NavigationItem
+            className={classes.navItem}
+            to="/units"
+            label="Units"
+            onClick={handleClose}
+          >
+            <GroupIcon />
+          </NavigationItem>
+          <NavigationItem
+            className={classes.navItem}
+            to="/logout"
+            label="Log Out"
+            onClick={handleClose}
+          >
+            <LockIcon />
+          </NavigationItem>
+          {auth.user.isAdmin && (
+            <Fragment>
+              <NavigationItem
+                className={classes.navItem}
+                to="/admin/users"
+                label="Users"
+                onClick={handleClose}
+              >
+                <GroupIcon />
+              </NavigationItem>
+            </Fragment>
+          )}
+        </Fragment>
       ) : (
         <NavigationItem
           className={classes.navItem}

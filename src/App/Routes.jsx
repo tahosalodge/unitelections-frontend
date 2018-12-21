@@ -17,9 +17,16 @@ const UnitSteps = lazy(() => import('components/UnitSteps'));
 const Home = lazy(() => import('pages/Home'));
 const Register = lazy(() => import('components/Register'));
 const Lodges = lazy(() => import('components/Lodges'));
-const Users = lazy(() => import('components/Users'));
+const Users = lazy(() => import('pages/Users'));
 
-const Routes = () => (
+const AdminRoutes = ({ auth, children }) => {
+  if (auth.user.isAdmin) {
+    return children;
+  }
+  return null;
+};
+
+const Routes = ({ auth }) => (
   <Router>
     <Suspense default fallback={<CircularProgress />}>
       <Election path="/elections/:electionId" />
@@ -35,8 +42,10 @@ const Routes = () => (
       <Login path="/login" />
       <Register path="/register" />
       <Lodges path="/lodges" />
-      <Users path="/users" />
       <Logout path="/logout" />
+      <AdminRoutes path="/admin" auth={auth}>
+        <Users path="/users" />
+      </AdminRoutes>
       <Home default />
     </Suspense>
   </Router>

@@ -47,7 +47,7 @@ class App extends React.Component {
           <main className={classes.content}>
             <div className={classes.appBarSpacer} />
             <div className={classes.page}>
-              <Routes />
+              <Routes auth={auth} />
             </div>
           </main>
           <Notifications />

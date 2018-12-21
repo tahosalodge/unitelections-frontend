@@ -4,6 +4,7 @@ import createActions from 'utils/createAction';
 import createReducer from 'utils/createReducer';
 import apiRequest from 'utils/apiRequest';
 import normalize from 'utils/normalize';
+import { errorNotification } from 'state/modules/notification';
 
 export const actions = createActions('USER');
 
@@ -116,6 +117,7 @@ function* create({ payload }) {
     history.navigate('/units');
   } catch (error) {
     yield put(createFailure(error));
+    yield put(errorNotification(error));
   }
 }
 
@@ -125,6 +127,7 @@ function* list() {
     yield put(listSuccess(users));
   } catch (error) {
     yield put(listFailure(error));
+    yield put(errorNotification(error));
   }
 }
 
@@ -134,22 +137,24 @@ function* get({ payload: { id } }) {
     yield put(getSuccess(users));
   } catch (error) {
     yield put(getFailure(error));
+    yield put(errorNotification(error));
   }
 }
 
 function* update({ payload: { id, patch } }) {
   try {
-    const { users } = yield call(apiRequest, `/v1/user/${id}`, 'PATCH', patch);
-    yield put(updateSuccess(users));
+    const { user } = yield call(apiRequest, `/v1/user/${id}`, 'PATCH', patch);
+    yield put(updateSuccess(user));
   } catch (error) {
     yield put(updateFailure(error));
+    yield put(errorNotification(error));
   }
 }
 
 function* remove({ payload: { id } }) {
   try {
-    const { users } = yield call(apiRequest, `/v1/user/${id}`, 'DELETE');
-    yield put(deleteSuccess(users));
+    yield call(apiRequest, `/v1/user/${id}`, 'DELETE');
+    yield put(deleteSuccess(id));
   } catch (error) {
     yield put(deleteFailure(error));
   }

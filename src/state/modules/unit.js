@@ -3,7 +3,7 @@ import createActions from 'utils/createAction';
 import createReducer from 'utils/createReducer';
 import apiRequest from 'utils/apiRequest';
 import normalize from 'utils/normalize';
-import { addNotification } from 'state/modules/notification';
+import { errorNotification } from 'state/modules/notification';
 import history from 'utils/history';
 
 export const actions = createActions('UNIT');
@@ -117,14 +117,7 @@ function* create({ payload }) {
     history.navigate(`/units/${unit._id}/request-election`);
   } catch (error) {
     yield put(createFailure(error));
-    yield put(
-      addNotification({
-        message: error.message,
-        options: {
-          variant: 'error',
-        },
-      })
-    );
+    yield put(errorNotification(error));
   }
 }
 
@@ -134,14 +127,7 @@ function* get({ payload: { unitId } }) {
     yield put(getSuccess(unit));
   } catch (error) {
     yield put(getFailure(error));
-    yield put(
-      addNotification({
-        message: error.message,
-        options: {
-          variant: 'error',
-        },
-      })
-    );
+    yield put(errorNotification(error));
   }
 }
 
@@ -151,14 +137,7 @@ function* update({ payload: { id, patch } }) {
     yield put(updateSuccess(unit));
   } catch (error) {
     yield put(updateFailure(error));
-    yield put(
-      addNotification({
-        message: error.message,
-        options: {
-          variant: 'error',
-        },
-      })
-    );
+    yield put(errorNotification(error));
   }
 }
 
@@ -168,14 +147,7 @@ function* remove({ payload: { id } }) {
     yield put(deleteSuccess(id));
   } catch (error) {
     yield put(deleteFailure(error));
-    yield put(
-      addNotification({
-        message: error.message,
-        options: {
-          variant: 'error',
-        },
-      })
-    );
+    yield put(errorNotification(error));
   }
 }
 
@@ -185,14 +157,7 @@ function* list() {
     yield put(listSuccess(units));
   } catch (error) {
     yield put(listFailure(error));
-    yield put(
-      addNotification({
-        message: error.message,
-        options: {
-          variant: 'error',
-        },
-      })
-    );
+    yield put(errorNotification(error));
   }
 }
 

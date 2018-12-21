@@ -12,6 +12,7 @@ const UserActions = ({
   selectedValue,
   userId,
   deleteUser,
+  editUser,
   ...props
 }) => (
   <Dialog
@@ -23,7 +24,13 @@ const UserActions = ({
     <DialogTitle id="simple-dialog-title">Account Actions</DialogTitle>
     <div>
       <List>
-        <ListItem button>
+        <ListItem
+          button
+          onClick={() => {
+            onClose();
+            editUser(userId);
+          }}
+        >
           <ListItemText primary="Edit User" />
         </ListItem>
         <ListItem button>
@@ -38,8 +45,6 @@ const UserActions = ({
 );
 
 UserActions.propTypes = {
-  // eslint-disable-next-line
-  classes: PropTypes.object.isRequired,
   onClose: PropTypes.func.isRequired,
   userId: PropTypes.string.isRequired,
 };
