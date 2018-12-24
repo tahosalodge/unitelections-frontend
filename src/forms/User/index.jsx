@@ -47,84 +47,97 @@ const UserForm = ({
         <Form>
           <DialogTitle id={id}>{title}</DialogTitle>
           <DialogContent>
-            <TextField
-              margin="dense"
-              name="fname"
-              label="First Name"
-              type="text"
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              name="lname"
-              label="Last Name"
-              type="text"
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              name="email"
-              label="Email Address"
-              type="text"
-              fullWidth
-            />
-            <FieldArray
-              name="belongsTo"
-              render={arrayHelpers => (
-                <Grid container spacing={24}>
-                  <Grid item xs={12}>
-                    {values.belongsTo &&
-                      values.belongsTo.map((relationship, index) => (
-                        // eslint-disable-next-line
-                        <Grid container key={index}>
-                          <Grid item xs={2}>
-                            <SelectField
-                              name={`belongsTo[${index}].model`}
-                              options={['Unit', 'Chapter', 'Election']}
-                            />
-                          </Grid>
-                          <Grid item xs={8}>
-                            <SelectField
-                              name={`belongsTo[${index}].organization`}
-                              options={selectItemsForModel(relationship.model, {
-                                units,
-                                chapters,
-                                elections,
-                              })}
-                              fast={false}
-                            />
-                          </Grid>
-                          <Grid item xs={2}>
-                            <IconButton
-                              type="button"
-                              color="primary"
-                              onClick={() => arrayHelpers.remove(index)}
-                            >
-                              <RemoveIcon />
-                            </IconButton>
-                          </Grid>
-                        </Grid>
-                      ))}
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Button
-                      type="button"
-                      color="primary"
-                      variant="contained"
-                      onClick={() =>
-                        arrayHelpers.push({
-                          model: '',
-                          organization: '',
-                          canManage: false,
-                        })
-                      }
-                    >
-                      Add relationship
-                    </Button>
-                  </Grid>
-                </Grid>
-              )}
-            />
+            <Grid container spacing={24}>
+              <Grid item xs={12}>
+                <TextField
+                  margin="dense"
+                  name="fname"
+                  label="First Name"
+                  type="text"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="dense"
+                  name="lname"
+                  label="Last Name"
+                  type="text"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  margin="dense"
+                  name="email"
+                  label="Email Address"
+                  type="text"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <FieldArray
+                  name="belongsTo"
+                  render={arrayHelpers => (
+                    <Grid container spacing={24}>
+                      <Grid item xs={12}>
+                        {values.belongsTo &&
+                          values.belongsTo.map((relationship, index) => (
+                            // eslint-disable-next-line
+                            <Grid container key={index}>
+                              <Grid item xs={2}>
+                                <SelectField
+                                  name={`belongsTo[${index}].model`}
+                                  options={['Unit', 'Chapter', 'Election']}
+                                />
+                              </Grid>
+                              <Grid item xs={8}>
+                                <SelectField
+                                  name={`belongsTo[${index}].organization`}
+                                  options={selectItemsForModel(
+                                    relationship.model,
+                                    {
+                                      units,
+                                      chapters,
+                                      elections,
+                                    }
+                                  )}
+                                  fast={false}
+                                />
+                              </Grid>
+                              <Grid item xs={2}>
+                                <IconButton
+                                  type="button"
+                                  color="primary"
+                                  onClick={() => arrayHelpers.remove(index)}
+                                >
+                                  <RemoveIcon />
+                                </IconButton>
+                              </Grid>
+                            </Grid>
+                          ))}
+                      </Grid>
+                      <Grid item xs={12}>
+                        <Button
+                          type="button"
+                          color="primary"
+                          variant="contained"
+                          onClick={() =>
+                            arrayHelpers.push({
+                              model: '',
+                              organization: '',
+                              canManage: false,
+                            })
+                          }
+                        >
+                          Add relationship
+                        </Button>
+                      </Grid>
+                    </Grid>
+                  )}
+                />
+              </Grid>
+            </Grid>
           </DialogContent>
           <DialogActions>
             <Button onClick={() => navigate('/admin/users')} color="primary">

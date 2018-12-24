@@ -98,7 +98,6 @@ class Users extends Component {
           userId={actions}
           onClose={this.closeActions}
           deleteUser={this.props.deleteUser}
-          editUser={this.openEdit}
         />
         <Table data={users} columns={this.columns} />
         <FloatingActionButton
