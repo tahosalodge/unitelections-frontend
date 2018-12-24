@@ -20,3 +20,5 @@ export const unitShape = shape({
 });
 
 export const arrayOfUnits = arrayOf(unitShape);
+
+export default unitShape;

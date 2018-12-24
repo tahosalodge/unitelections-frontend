@@ -21,6 +21,11 @@ export const actions = {
     failure: 'LOGIN_FAILURE',
   },
   logout: 'LOGOUT',
+  resetPassword: {
+    request: 'RESETPASS_REQUEST',
+    success: 'RESETPASS_SUCCESS',
+    failure: 'RESETPASS_FAILURE',
+  },
 };
 
 export function reducer(state = initialState, action) {
@@ -33,7 +38,8 @@ export function reducer(state = initialState, action) {
         user: payload.user,
         lodge: payload.lodge,
       };
-    case action.logout:
+    case actions.logout:
+    case actions.resetPassword.success:
       return initialState;
 
     default:
@@ -82,6 +88,19 @@ function registerFailure(error) {
   };
 }
 
+export function resetPassword(payload) {
+  return {
+    type: actions.resetPassword.request,
+    payload,
+  };
+}
+function resetPasswordFailure(error) {
+  return {
+    type: actions.resetPassword.failure,
+    error,
+  };
+}
+
 function* registerSaga({ payload }) {
   try {
     const response = yield call(
@@ -111,6 +130,7 @@ function* loginSaga({ payload }) {
     const response = yield call(apiRequest, '/v1/user/login', 'POST', payload);
     localStorage.setItem('token', response.user.token);
     yield put(loginSuccess(response));
+    history.navigate('/');
   } catch (error) {
     yield put(loginFailure(error));
     yield put(
@@ -144,7 +164,11 @@ function* checkToken() {
     if (error.code !== 'NETWORK') {
       localStorage.removeItem('token');
     }
-    if (pathname.indexOf('register') === -1 && pathname !== '/') {
+    if (
+      pathname.indexOf('register') === -1 &&
+      pathname !== '/' &&
+      pathname.indexOf('reset-password') === -1
+    ) {
       history.navigate('/login');
     }
   }
@@ -158,9 +182,27 @@ function* logoutSaga() {
   }
 }
 
+function* resetPasswordSaga({ payload }) {
+  try {
+    yield call(apiRequest, '/v1/user/reset-password', 'POST', payload);
+    yield put(login({ email: payload.email, password: payload.password }));
+  } catch (error) {
+    yield put(resetPasswordFailure(error));
+    yield put(
+      addNotification({
+        message: error.message,
+        options: {
+          variant: 'error',
+        },
+      })
+    );
+  }
+}
+
 export function* saga() {
   yield checkToken();
   yield takeLatest(actions.register.request, registerSaga);
   yield takeLatest(actions.login.request, loginSaga);
   yield takeLatest(actions.logout, logoutSaga);
+  yield takeLatest(actions.resetPassword.request, resetPasswordSaga);
 }

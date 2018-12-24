@@ -14,7 +14,7 @@ const initialState = {
 
 export const reducer = createReducer(actions, initialState);
 
-export const createUsers = payload => ({
+export const createUser = payload => ({
   type: actions.create.request,
   payload,
 });
@@ -112,9 +112,9 @@ const deleteFailure = error => ({
 
 function* create({ payload }) {
   try {
-    const { users } = yield call(apiRequest, '/v1/user', 'PUT', payload);
-    yield put(createSuccess(users));
-    history.navigate('/units');
+    const { user } = yield call(apiRequest, '/v1/user', 'POST', payload);
+    yield put(createSuccess(user));
+    history.navigate('/admin/users');
   } catch (error) {
     yield put(createFailure(error));
     yield put(errorNotification(error));
@@ -133,8 +133,8 @@ function* list() {
 
 function* get({ payload: { id } }) {
   try {
-    const { users } = yield call(apiRequest, `/v1/user/${id}`);
-    yield put(getSuccess(users));
+    const { user } = yield call(apiRequest, `/v1/user/${id}`);
+    yield put(getSuccess(user));
   } catch (error) {
     yield put(getFailure(error));
     yield put(errorNotification(error));

@@ -5,13 +5,12 @@ import MuiTextField from '@material-ui/core/TextField';
 const TextField = props => (
   <FastField
     {...props}
-    render={({ field, form: { touched, errors }, disabled = false }) => (
+    render={({ field, form: { touched, errors } }) => (
       <MuiTextField
         {...props}
         {...field}
         error={touched[field.name] && !!errors[field.name]}
         helperText={errors[field.name] ? errors[field.name] : props.helperText}
-        disabled={disabled}
         value={field.value || ''}
       />
     )}

@@ -1,6 +1,7 @@
 module.exports = {
   parser: 'babel-eslint',
   extends: ['airbnb', 'plugin:prettier/recommended'],
+  plugins: ['redux-saga'],
   env: {
     browser: true,
   },

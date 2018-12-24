@@ -5,6 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
+import { Link } from '@reach/router';
 
 const UserActions = ({
   classes,
@@ -12,7 +13,6 @@ const UserActions = ({
   selectedValue,
   userId,
   deleteUser,
-  editUser,
   ...props
 }) => (
   <Dialog
@@ -24,13 +24,7 @@ const UserActions = ({
     <DialogTitle id="simple-dialog-title">Account Actions</DialogTitle>
     <div>
       <List>
-        <ListItem
-          button
-          onClick={() => {
-            onClose();
-            editUser(userId);
-          }}
-        >
+        <ListItem button onClick={onClose} component={Link} to={userId}>
           <ListItemText primary="Edit User" />
         </ListItem>
         <ListItem button>

@@ -12,37 +12,26 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import TextField from 'components/Form/TextField';
-import { register } from 'state/modules/auth';
+import { resetPassword } from 'state/modules/auth';
 
-const Register = ({ fullScreen, ...props }) => (
-  <Dialog fullScreen={fullScreen} open aria-labelledby="register">
-    <Formik onSubmit={values => props.register(values)}>
+const Register = ({ fullScreen, email, token, ...props }) => (
+  <Dialog fullScreen={fullScreen} open aria-labelledby="resetPassword">
+    <Formik
+      onSubmit={values => props.resetPassword(values)}
+      initialValues={{ email, token }}
+    >
       {({ handleSubmit }) => (
         <Form>
-          <DialogTitle id="register">Create an account</DialogTitle>
+          <DialogTitle id="resetPassword">Reset Password</DialogTitle>
           <DialogContent>
             <DialogContentText>Helper text goes here.</DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              name="fname"
-              label="First Name"
-              type="text"
-              fullWidth
-            />
-            <TextField
-              margin="dense"
-              name="lname"
-              label="Last Name"
-              type="text"
-              fullWidth
-            />
             <TextField
               margin="dense"
               name="email"
               label="Email Address"
               type="email"
               fullWidth
+              disabled
             />
             <TextField
               margin="dense"
@@ -57,7 +46,7 @@ const Register = ({ fullScreen, ...props }) => (
               Cancel
             </Button>
             <Button onClick={handleSubmit} color="primary" autoFocus>
-              Register
+              Reset Password
             </Button>
           </DialogActions>
         </Form>
@@ -68,13 +57,15 @@ const Register = ({ fullScreen, ...props }) => (
 
 Register.propTypes = {
   fullScreen: PropTypes.bool.isRequired,
-  register: PropTypes.func.isRequired,
+  resetPassword: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
+  token: PropTypes.string.isRequired,
 };
 
 export default compose(
   connect(
     null,
-    { register }
+    { resetPassword }
   ),
   withMobileDialog()
 )(Register);

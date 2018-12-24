@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Page from 'components/Page';
+import Chapter from 'components/Chapter';
 import { selectUnit } from 'selectors/unit';
 import { getUnit } from 'state/modules/unit';
-import Chapter from 'components/Chapter';
+import unitShape from 'shapes/unit';
 
 class Unit extends React.Component {
   static propTypes = {
-    unit: PropTypes.shape({}),
+    unit: unitShape.isRequired,
     getUnit: PropTypes.func.isRequired,
     unitId: PropTypes.string.isRequired,
   };

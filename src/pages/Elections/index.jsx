@@ -8,11 +8,13 @@ import Page from 'components/Page';
 import Table from 'components/Table';
 import { selectElections } from 'selectors/election';
 import { listElections } from 'state/modules/election';
+import { arrayOfElections } from 'shapes/election';
 import Actions from './Actions';
 
 class Elections extends React.Component {
   static propTypes = {
     listElections: PropTypes.func.isRequired,
+    elections: arrayOfElections.isRequired,
   };
 
   state = {

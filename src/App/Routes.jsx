@@ -3,6 +3,7 @@ import { Router } from '@reach/router';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Logout from 'components/Logout';
 import Login from 'components/Login';
+import authShape from 'shapes/auth';
 
 const Election = lazy(() => import('pages/Election'));
 const Elections = lazy(() => import('pages/Elections'));
@@ -18,6 +19,9 @@ const Home = lazy(() => import('pages/Home'));
 const Register = lazy(() => import('components/Register'));
 const Lodges = lazy(() => import('components/Lodges'));
 const Users = lazy(() => import('pages/Users'));
+const CreateUser = lazy(() => import('pages/Users/Create'));
+const EditUser = lazy(() => import('pages/Users/Edit'));
+const ResetPassword = lazy(() => import('pages/ResetPassword'));
 
 const AdminRoutes = ({ auth, children }) => {
   if (auth.user.isAdmin) {
@@ -31,8 +35,8 @@ const Routes = ({ auth }) => (
     <Suspense default fallback={<CircularProgress />}>
       <Election path="/elections/:electionId" />
       <Elections path="/elections" />
-      <Unit path="/units/:unitId" />
       <NewElection path="/units/:unitId/request-election" />
+      <Unit path="/units/:unitId" />
       <Units path="/units" />
       <NewUnit path="/units/new" />
       <Candidate path="/candidate" />
@@ -41,14 +45,22 @@ const Routes = ({ auth }) => (
       <UnitSteps path="/unit-steps" />
       <Login path="/login" />
       <Register path="/register" />
-      <Lodges path="/lodges" />
       <Logout path="/logout" />
+      <ResetPassword path="/reset-password/:email/:token" />
       <AdminRoutes path="/admin" auth={auth}>
-        <Users path="/users" />
+        <Users path="users">
+          <CreateUser path="new" />
+          <EditUser path=":userId" />
+        </Users>
+        <Lodges path="lodges" />
       </AdminRoutes>
       <Home default />
     </Suspense>
   </Router>
 );
+
+Routes.propTypes = {
+  auth: authShape.isRequired,
+};
 
 export default Routes;

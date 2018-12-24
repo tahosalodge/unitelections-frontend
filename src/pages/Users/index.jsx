@@ -1,10 +1,13 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from '@reach/router';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import AddIcon from '@material-ui/icons/Add';
+import FloatingActionButton from '@material-ui/core/Fab';
 
 import Table from 'components/Table';
 import Page from 'components/Page';
@@ -14,7 +17,6 @@ import { listElections } from 'state/modules/election';
 import { selectUsers } from 'selectors/user';
 import Actions from './Actions';
 import Organization from './Organization';
-import Edit from './Edit';
 
 const styles = theme => ({
   table: {
@@ -22,6 +24,11 @@ const styles = theme => ({
   },
   chip: {
     margin: theme.spacing.unit,
+  },
+  fab: {
+    position: 'absolute',
+    bottom: theme.spacing.unit * 2,
+    right: theme.spacing.unit * 2,
   },
 });
 
@@ -32,11 +39,11 @@ class Users extends Component {
     listUnits: PropTypes.func.isRequired,
     listElections: PropTypes.func.isRequired,
     deleteUser: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired,
   };
 
   state = {
     actions: '',
-    editing: '',
   };
 
   columns = [
@@ -82,22 +89,11 @@ class Users extends Component {
 
   closeActions = () => this.setState({ actions: '' });
 
-  openEdit = editing =>
-    this.setState({
-      editing,
-    });
-
-  closeEdit = () =>
-    this.setState({
-      editing: '',
-    });
-
   render() {
-    const { actions, editing } = this.state;
-    const { users } = this.props;
+    const { actions } = this.state;
+    const { users, classes, children } = this.props;
     return (
-      <Page title="Users">
-        <Edit userId={editing} handleClose={this.closeEdit} />
+      <Page title="Users" fullwidth>
         <Actions
           userId={actions}
           onClose={this.closeActions}
@@ -105,6 +101,15 @@ class Users extends Component {
           editUser={this.openEdit}
         />
         <Table data={users} columns={this.columns} />
+        <FloatingActionButton
+          className={classes.fab}
+          color="secondary"
+          component={Link}
+          to="new"
+        >
+          <AddIcon />
+        </FloatingActionButton>
+        {children}
       </Page>
     );
   }

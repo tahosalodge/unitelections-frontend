@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import compose from 'lodash/fp/compose';
 import { Formik, Form } from 'formik';
 import { Paper, Typography, withStyles, Button } from '@material-ui/core';
 import TextField from 'components/Form/TextField';
 import { updateUser } from 'state/modules/user';
+import userShape from 'shapes/user';
 
 const styles = theme => ({
   root: {
@@ -72,6 +74,11 @@ const Profile = ({ classes, user, ...props }) => (
     </Formik>
   </Paper>
 );
+
+Profile.propTypes = {
+  user: userShape.isRequired,
+  updateUser: PropTypes.func.isRequired,
+};
 
 export default compose(
   connect(
