@@ -40,6 +40,13 @@ const UnitActions = ({
         >
           <ListItemText primary="Request Election" />
         </ListItem>
+        <ListItem
+          button
+          component={Link}
+          to={`/units/${unitId}/schedule-election`}
+        >
+          <ListItemText primary="Schedule Election" />
+        </ListItem>
         <ListItem button>
           <ListItemText primary="Edit Unit" />
         </ListItem>

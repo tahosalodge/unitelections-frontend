@@ -8,6 +8,8 @@ import history from 'utils/history';
 
 export const actions = createActions('ELECTION');
 
+const SCHEDULE_ELECTION = 'SCHEDULE_ELECTION';
+
 const initialState = {
   items: {},
 };
@@ -75,9 +77,12 @@ const getFailure = error => ({
   },
 });
 
-export const updateElection = payload => ({
+export const updateElection = (id, patch) => ({
   type: actions.update.request,
-  payload,
+  payload: {
+    id,
+    patch,
+  },
 });
 
 const updateSuccess = election => ({
@@ -110,6 +115,13 @@ const deleteFailure = error => ({
   type: actions.delete.failure,
   payload: {
     error,
+  },
+});
+
+export const scheduleElection = election => ({
+  type: SCHEDULE_ELECTION,
+  payload: {
+    election,
   },
 });
 
@@ -171,10 +183,23 @@ function* list() {
   }
 }
 
+function* schedule({ payload: { election } }) {
+  try {
+    if (election._id) {
+      yield put(updateElection(election._id, election));
+    } else {
+      yield put(createElection(election));
+    }
+  } catch (error) {
+    yield put(errorNotification(error));
+  }
+}
+
 export function* saga() {
   yield takeLatest(actions.create.request, create);
   yield takeLatest(actions.list.request, list);
   yield takeLatest(actions.get.request, get);
   yield takeLatest(actions.update.request, update);
   yield takeLatest(actions.delete.request, remove);
+  yield takeLatest(SCHEDULE_ELECTION, schedule);
 }

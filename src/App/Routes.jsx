@@ -7,7 +7,7 @@ import authShape from 'shapes/auth';
 
 const Election = lazy(() => import('pages/Election'));
 const Elections = lazy(() => import('pages/Elections'));
-const NewElection = lazy(() => import('pages/NewElection'));
+const NewElection = lazy(() => import('forms/Election'));
 const Unit = lazy(() => import('pages/Unit'));
 const NewUnit = lazy(() => import('pages/NewUnit'));
 const Units = lazy(() => import('pages/Units'));
@@ -22,6 +22,7 @@ const Users = lazy(() => import('pages/Users'));
 const CreateUser = lazy(() => import('pages/Users/Create'));
 const EditUser = lazy(() => import('pages/Users/Edit'));
 const ResetPassword = lazy(() => import('pages/ResetPassword'));
+const ScheduleElection = lazy(() => import('forms/Election/Schedule'));
 
 const AdminRoutes = ({ auth, children }) => {
   if (auth.user.isAdmin) {
@@ -33,10 +34,14 @@ const AdminRoutes = ({ auth, children }) => {
 const Routes = ({ auth }) => (
   <Router>
     <Suspense default fallback={<CircularProgress />}>
-      <Election path="/elections/:electionId" />
+      <Election path="/elections/:electionId">
+        <ScheduleElection path="schedule" />
+      </Election>
       <Elections path="/elections" />
       <NewElection path="/units/:unitId/request-election" />
-      <Unit path="/units/:unitId" />
+      <Unit path="/units/:unitId">
+        <ScheduleElection path="schedule-election" />
+      </Unit>
       <Units path="/units" />
       <NewUnit path="/units/new" />
       <Candidate path="/candidate" />

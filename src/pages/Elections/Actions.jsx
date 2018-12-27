@@ -35,6 +35,13 @@ const ElectionActions = ({
         <ListItem button component={Link} to={`/elections/${electionId}`}>
           <ListItemText primary="Details" />
         </ListItem>
+        <ListItem
+          button
+          component={Link}
+          to={`/elections/${electionId}/schedule`}
+        >
+          <ListItemText primary="Schedule" />
+        </ListItem>
         <ListItem button>
           <ListItemText primary="Edit Election" />
         </ListItem>

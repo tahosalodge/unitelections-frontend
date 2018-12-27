@@ -1,5 +1,4 @@
 import addWeeks from 'date-fns/addWeeks';
-import isBefore from 'date-fns/isBefore';
 import parse from 'date-fns/parse';
 
 export const FIRST_ELECTION_DATE = parse(
@@ -8,6 +7,4 @@ export const FIRST_ELECTION_DATE = parse(
   new Date()
 );
 
-export const minDate = isBefore(Date.now(), FIRST_ELECTION_DATE)
-  ? FIRST_ELECTION_DATE
-  : addWeeks(Date.now(), 2);
+export const minDate = addWeeks(Date.now(), 2);
