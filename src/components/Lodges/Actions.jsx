@@ -1,21 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
-import blue from '@material-ui/core/colors/blue';
+import Confirm from 'components/Confirm';
+import { Feature, IS_ADMIN } from 'utils/features';
 
-const styles = {
-  avatar: {
-    backgroundColor: blue[100],
-    color: blue[600],
-  },
-};
-
-const SimpleDialog = ({
+const LodgeActions = ({
   classes,
   onClose,
   selectedValue,
@@ -30,30 +23,29 @@ const SimpleDialog = ({
     {...other}
   >
     <DialogTitle id="simple-dialog-title">Lodge Actions</DialogTitle>
-    <div>
-      <List>
-        <ListItem button>
-          <ListItemText primary="Add User" />
-        </ListItem>
-        <ListItem button>
-          <ListItemText primary="Edit Lodge" />
-        </ListItem>
-        <ListItem button>
-          <ListItemText
-            primary="Delete Lodge"
-            onClick={() => deleteLodge(lodgeId)}
-          />
-        </ListItem>
-      </List>
-    </div>
+    <List>
+      <ListItem button>
+        <ListItemText primary="Add User" />
+      </ListItem>
+      <ListItem button>
+        <ListItemText primary="Edit Lodge" />
+      </ListItem>
+      <Feature name={IS_ADMIN}>
+        <Confirm
+          button
+          onClick={() => deleteLodge(lodgeId)}
+          text="Delete Election"
+        />
+      </Feature>
+    </List>
   </Dialog>
 );
 
-SimpleDialog.propTypes = {
+LodgeActions.propTypes = {
   // eslint-disable-next-line
   classes: PropTypes.object.isRequired,
   onClose: PropTypes.func.isRequired,
   userId: PropTypes.string.isRequired,
 };
 
-export default withStyles(styles)(SimpleDialog);
+export default LodgeActions;

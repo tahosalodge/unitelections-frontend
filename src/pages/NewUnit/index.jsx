@@ -98,6 +98,7 @@ const NewUnit = ({ classes, chapters, ...props }) => (
             </Grid>
             <Grid item xs={12}>
               <Button
+                type="submit"
                 onClick={handleSubmit}
                 variant="contained"
                 color="secondary"

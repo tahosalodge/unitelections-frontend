@@ -5,13 +5,14 @@ import Page from 'components/Page';
 import Chapter from 'components/Chapter';
 import { selectUnit } from 'selectors/unit';
 import { getUnit } from 'state/modules/unit';
-import unitShape from 'shapes/unit';
+import { unitShape } from 'shapes/unit';
 
 class Unit extends React.Component {
   static propTypes = {
     unit: unitShape.isRequired,
     getUnit: PropTypes.func.isRequired,
     unitId: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
   };
 
   componentDidMount() {
@@ -26,11 +27,13 @@ class Unit extends React.Component {
     }
     const {
       unit: { unitType, number, chapter },
+      children,
     } = this.props;
 
     return (
       <Page title={`${unitType} ${number}`}>
         <Chapter chapterId={chapter} />
+        {children}
       </Page>
     );
   }

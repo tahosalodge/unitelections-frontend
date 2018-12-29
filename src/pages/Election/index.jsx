@@ -13,6 +13,7 @@ class Election extends React.Component {
     electionId: PropTypes.string.isRequired,
     getElection: PropTypes.func.isRequired,
     election: electionShape.isRequired,
+    children: PropTypes.node.isRequired,
   };
 
   componentDidMount() {
@@ -21,7 +22,7 @@ class Election extends React.Component {
   }
 
   render() {
-    const { election, loading } = this.props;
+    const { election, loading, children } = this.props;
     return (
       <Page title="Election">
         <h2>Election Overview</h2>
@@ -50,6 +51,7 @@ class Election extends React.Component {
               </h3>
             )}
           </Fragment>
+          {children}
         </Loading>
       </Page>
     );

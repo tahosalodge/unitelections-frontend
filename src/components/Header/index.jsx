@@ -7,8 +7,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import MenuIcon from '@material-ui/icons/Menu';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { Button, Badge } from '@material-ui/core';
+import Button from '@material-ui/core/Button';
+// import NotificationsIcon from '@material-ui/icons/Notifications';
 
 const Header = ({ classes, open, handleOpen, auth }) => (
   <AppBar position="absolute" className={classes.appBar}>
@@ -32,13 +32,13 @@ const Header = ({ classes, open, handleOpen, auth }) => (
       {auth.loggedIn && (
         <Fragment>
           <Typography variant="subtitle1" color="inherit">
-            {`Welcome ${auth.user.fname}`}
+            {`${auth.user.fname} ${auth.user.lname}`}
           </Typography>
-          <IconButton color="inherit">
+          {/* <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
               <NotificationsIcon />
             </Badge>
-          </IconButton>
+          </IconButton> */}
         </Fragment>
       )}
     </Toolbar>

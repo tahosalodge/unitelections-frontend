@@ -966,6 +966,11 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.2.tgz#54c5a964462be3d4d78af631363c18d6fa91ac26"
   integrity sha512-yprFYuno9FtNsSHVlSWd+nRlmGoAbqbeCwOryP6sC/zoCjhpArcRMYp19EvpSUSizJAlsXEwJv+wcWS9XaXdMw==
 
+"@paralleldrive/react-feature-toggles@^2.0.2":
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/@paralleldrive/react-feature-toggles/-/react-feature-toggles-2.0.2.tgz#922bfb6c26f199059160c6652596892b85643301"
+  integrity sha512-rQRiQ/EbAhv1BgvMnqYKOiBGcDRM9Z6lKkfPWIUftBfi6vR5WBu8fIhUN0v86mh2rW9cDnLsMLCJ93gqq5kERg==
+
 "@reach/router@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@reach/router/-/router-1.2.1.tgz#34ae3541a5ac44fa7796e5506a5d7274a162be4e"

@@ -4,10 +4,12 @@ import { Link } from '@reach/router';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import withStyles from '@material-ui/core/styles/withStyles';
+import styles from 'App/styles';
 
-const NavigationItem = ({ to, children, label, onClick }) => (
-  <ListItem button component={Link} to={to} onClick={onClick}>
-    <ListItemIcon>{children}</ListItemIcon>
+const NavigationItem = ({ children, label, classes, ...props }) => (
+  <ListItem button component={Link} className={classes.navItem} {...props}>
+    <ListItemIcon className={classes.navIcon}>{children}</ListItemIcon>
     <ListItemText primary={label} />
   </ListItem>
 );
@@ -19,4 +21,4 @@ NavigationItem.propTypes = {
   onClick: PropTypes.func.isRequired,
 };
 
-export default NavigationItem;
+export default withStyles(styles)(NavigationItem);

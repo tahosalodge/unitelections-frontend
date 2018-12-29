@@ -6,6 +6,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import { Link } from '@reach/router';
+import { Feature, IS_ADMIN } from 'utils/features';
+import Confirm from 'components/Confirm';
 
 const UserActions = ({
   classes,
@@ -30,9 +32,13 @@ const UserActions = ({
         <ListItem button>
           <ListItemText primary="Reset Password" />
         </ListItem>
-        <ListItem button onClick={() => deleteUser(userId)}>
-          <ListItemText primary="Delete User" />
-        </ListItem>
+        <Feature name={IS_ADMIN}>
+          <Confirm
+            button
+            onClick={() => deleteUser(userId)}
+            text="Delete User"
+          />
+        </Feature>
       </List>
     </div>
   </Dialog>

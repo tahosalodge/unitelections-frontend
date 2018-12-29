@@ -88,7 +88,12 @@ const CreateLodge = ({ fullScreen, open, handleClose, ...props }) => (
             <Button onClick={handleClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={handleSubmit} color="primary" autoFocus>
+            <Button
+              type="submit"
+              onClick={handleSubmit}
+              color="primary"
+              autoFocus
+            >
               Create Lodge
             </Button>
           </DialogActions>

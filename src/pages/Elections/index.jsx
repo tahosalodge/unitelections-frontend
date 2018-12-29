@@ -7,7 +7,7 @@ import MoreIcon from '@material-ui/icons/MoreVert';
 import Page from 'components/Page';
 import Table from 'components/Table';
 import { selectElections } from 'selectors/election';
-import { listElections } from 'state/modules/election';
+import { listElections, deleteElection } from 'state/modules/election';
 import { arrayOfElections } from 'shapes/election';
 import Actions from './Actions';
 
@@ -15,6 +15,7 @@ class Elections extends React.Component {
   static propTypes = {
     listElections: PropTypes.func.isRequired,
     elections: arrayOfElections.isRequired,
+    deleteElection: PropTypes.func.isRequired,
   };
 
   state = {
@@ -69,7 +70,11 @@ class Elections extends React.Component {
     const { actions } = this.state;
     return (
       <Page title="Elections">
-        <Actions electionId={actions} onClose={this.closeActions} />
+        <Actions
+          electionId={actions}
+          onClose={this.closeActions}
+          deleteElection={this.props.deleteElection}
+        />
         <Table data={elections} columns={this.columns} />
       </Page>
     );
@@ -82,5 +87,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { listElections }
+  { listElections, deleteElection }
 )(Elections);

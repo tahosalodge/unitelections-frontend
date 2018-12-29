@@ -24,7 +24,7 @@ const styles = theme => ({
   },
   menuButton: {
     marginLeft: 12,
-    marginRight: 36,
+    marginRight: 12,
   },
   title: {
     flexGrow: 1,
@@ -66,6 +66,12 @@ const styles = theme => ({
     [theme.breakpoints.up('sm')]: {
       padding: theme.spacing.unit * 10,
     },
+  },
+  list: {
+    marginTop: theme.spacing.unit * 1.5,
+  },
+  navIcon: {
+    margin: '0 8px',
   },
 });
 
