@@ -62,6 +62,7 @@ const Profile = ({ classes, user, ...props }) => (
           />
           <br />
           <Button
+            type="submit"
             onClick={handleSubmit}
             className={classes.inputs}
             variant="contained"

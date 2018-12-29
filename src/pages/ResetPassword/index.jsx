@@ -45,7 +45,12 @@ const Register = ({ fullScreen, email, token, ...props }) => (
             <Button component={Link} to="/" color="primary">
               Cancel
             </Button>
-            <Button onClick={handleSubmit} color="primary" autoFocus>
+            <Button
+              type="submit"
+              onClick={handleSubmit}
+              color="primary"
+              autoFocus
+            >
               Reset Password
             </Button>
           </DialogActions>

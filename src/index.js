@@ -11,7 +11,9 @@ import { SnackbarProvider } from 'notistack';
 
 import createStore from 'state';
 import history from 'utils/history';
+import { ConnectedFeatureProvider } from 'utils/features';
 import App from './App';
+
 import 'index.css';
 
 const store = createStore();
@@ -35,12 +37,14 @@ const Root = () => (
   <LocationProvider history={history}>
     <MuiPickersUtilsProvider utils={DateFnsUtils}>
       <Provider store={store}>
-        <SnackbarProvider>
-          <MuiThemeProvider theme={theme}>
-            <CssBaseline />
-            <App />
-          </MuiThemeProvider>
-        </SnackbarProvider>
+        <ConnectedFeatureProvider>
+          <SnackbarProvider>
+            <MuiThemeProvider theme={theme}>
+              <CssBaseline />
+              <App />
+            </MuiThemeProvider>
+          </SnackbarProvider>
+        </ConnectedFeatureProvider>
       </Provider>
     </MuiPickersUtilsProvider>
   </LocationProvider>

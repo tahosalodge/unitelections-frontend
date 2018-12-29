@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Header from 'components/Header';
 import Navigation from 'components/Navigation';
 import Notifications from 'components/Notifications';
@@ -30,7 +29,6 @@ class App extends React.Component {
 
     return (
       <Fragment>
-        <CssBaseline />
         <div className={classes.root}>
           <Header
             classes={classes}

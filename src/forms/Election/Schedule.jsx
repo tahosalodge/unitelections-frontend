@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Formik, Form } from 'formik';
-import { Link } from '@reach/router';
 import format from 'date-fns/format';
 import isWeekend from 'date-fns/isWeekend';
 import Button from '@material-ui/core/Button';
@@ -124,7 +123,7 @@ class ScheduleElection extends React.Component {
                 <Button onClick={() => window.history.back()} color="primary">
                   Cancel
                 </Button>
-                <Button onClick={handleSubmit} color="primary">
+                <Button type="submit" onClick={handleSubmit} color="primary">
                   Schedule Election
                 </Button>
               </DialogActions>

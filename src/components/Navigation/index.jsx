@@ -7,8 +7,8 @@ import GroupIcon from '@material-ui/icons/Group';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import LockIcon from '@material-ui/icons/Lock';
 
+import authShape from 'shapes/auth';
 import NavigationItem from './Item';
-import authShape from '../../shapes/auth';
 
 const Navigation = ({ classes, open, handleClose, auth }) => (
   <Drawer
@@ -22,33 +22,21 @@ const Navigation = ({ classes, open, handleClose, auth }) => (
       {auth.loggedIn ? (
         <Fragment>
           <NavigationItem
-            className={classes.navItem}
             to="/elections"
             label="Elections"
             onClick={handleClose}
           >
             <PersonAddIcon />
           </NavigationItem>
-          <NavigationItem
-            className={classes.navItem}
-            to="/units"
-            label="Units"
-            onClick={handleClose}
-          >
+          <NavigationItem to="/units" label="Units" onClick={handleClose}>
             <GroupIcon />
           </NavigationItem>
-          <NavigationItem
-            className={classes.navItem}
-            to="/logout"
-            label="Log Out"
-            onClick={handleClose}
-          >
+          <NavigationItem to="/logout" label="Log Out" onClick={handleClose}>
             <LockIcon />
           </NavigationItem>
           {auth.user.isAdmin && (
             <Fragment>
               <NavigationItem
-                className={classes.navItem}
                 to="/admin/users"
                 label="Users"
                 onClick={handleClose}
@@ -59,12 +47,7 @@ const Navigation = ({ classes, open, handleClose, auth }) => (
           )}
         </Fragment>
       ) : (
-        <NavigationItem
-          className={classes.navItem}
-          to="/login"
-          label="Log In"
-          onClick={handleClose}
-        >
+        <NavigationItem to="/login" label="Log In" onClick={handleClose}>
           <LockIcon />
         </NavigationItem>
       )}

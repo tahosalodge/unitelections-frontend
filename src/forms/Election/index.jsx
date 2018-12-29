@@ -74,6 +74,7 @@ const NewElection = ({ unitId, ...props }) => (
             />
             <Grid item xs={12}>
               <Button
+                type="submit"
                 onClick={handleSubmit}
                 variant="contained"
                 color="secondary"

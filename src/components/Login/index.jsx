@@ -45,7 +45,7 @@ const Login = ({ fullScreen, ...props }) => {
               <Button component={Link} to="/" color="primary">
                 Cancel
               </Button>
-              <Button onClick={handleSubmit} color="primary">
+              <Button type="submit" onClick={handleSubmit} color="primary">
                 Submit
               </Button>
             </DialogActions>

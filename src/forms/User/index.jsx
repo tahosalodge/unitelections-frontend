@@ -143,7 +143,12 @@ const UserForm = ({
             <Button onClick={() => navigate('/admin/users')} color="primary">
               Cancel
             </Button>
-            <Button onClick={handleSubmit} color="primary" autoFocus>
+            <Button
+              type="submit"
+              onClick={handleSubmit}
+              color="primary"
+              autoFocus
+            >
               {title}
             </Button>
           </DialogActions>
