@@ -22,7 +22,7 @@ const NewElection = ({ unitId, ...props }) => (
   <Page title="Request Election">
     <Formik
       onSubmit={values => props.createElection(values, unitId)}
-      initialValues={{ requestedDates: [minDate], unitId }}
+      initialValues={{ requestedDates: [minDate], unitId, status: 'Requested' }}
       validate={validate}
     >
       {({ handleSubmit, values }) => (
