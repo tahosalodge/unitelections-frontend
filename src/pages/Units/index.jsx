@@ -11,7 +11,7 @@ import AddIcon from '@material-ui/icons/Add';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Page from 'components/Page';
 import Table from 'components/Table';
-import { listUnits } from 'state/modules/unit';
+import { listUnits, deleteUnit } from 'state/modules/unit';
 import { getChapters } from 'selectors/auth';
 import createMapLink from 'utils/googleMapLink';
 import { arrayOfUnits } from 'shapes/unit';
@@ -31,6 +31,7 @@ class Units extends React.Component {
     units: arrayOfUnits.isRequired,
     chapters: arrayOfChapters.isRequired,
     listUnits: PropTypes.func.isRequired,
+    deleteUnit: PropTypes.func.isRequired,
   };
 
   state = {
@@ -87,7 +88,11 @@ class Units extends React.Component {
     return (
       <Page title="Units">
         <Table data={units} columns={this.columns} />
-        <Actions unitId={actions} onClose={this.closeActions} />
+        <Actions
+          unitId={actions}
+          onClose={this.closeActions}
+          deleteUnit={this.props.deleteUnit}
+        />
         <FloatingActionButton
           className={classes.fab}
           color="secondary"
@@ -109,7 +114,7 @@ const mapStateToProps = state => ({
 export default compose(
   connect(
     mapStateToProps,
-    { listUnits }
+    { listUnits, deleteUnit }
   ),
   withStyles(styles)
 )(Units);
