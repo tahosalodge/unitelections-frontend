@@ -5,6 +5,7 @@ import apiRequest from 'utils/apiRequest';
 import normalize from 'utils/normalize';
 import { errorNotification } from 'state/modules/notification';
 import history from 'utils/history';
+import ReactGA from 'react-ga';
 
 export const actions = createActions('ELECTION');
 
@@ -131,6 +132,10 @@ function* create({ payload }) {
       ...payload,
     });
     yield put(createSuccess(election));
+    ReactGA.event({
+      category: 'Election',
+      action: payload.status,
+    });
     history.navigate(`/units/${election.unit}`);
   } catch (error) {
     yield put(createFailure(error));
@@ -156,6 +161,10 @@ function* update({ payload: { id, patch } }) {
       'PATCH',
       patch
     );
+    ReactGA.event({
+      category: 'Election',
+      action: 'Scheduled',
+    });
     yield put(updateSuccess(election));
   } catch (error) {
     yield put(updateFailure(error));

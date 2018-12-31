@@ -2,6 +2,7 @@ import { call, put, takeLatest } from 'redux-saga/effects';
 import apiRequest from 'utils/apiRequest';
 import { addNotification } from 'state/modules/notification';
 import history from 'utils/history';
+import ReactGA from 'react-ga';
 
 const initialState = {
   loggedIn: false,
@@ -186,6 +187,10 @@ function* resetPasswordSaga({ payload }) {
   try {
     yield call(apiRequest, '/v1/user/reset-password', 'POST', payload);
     yield put(login({ email: payload.email, password: payload.password }));
+    ReactGA.event({
+      category: 'User',
+      action: 'Reset password',
+    });
   } catch (error) {
     yield put(resetPasswordFailure(error));
     yield put(

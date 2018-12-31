@@ -8,6 +8,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { SnackbarProvider } from 'notistack';
+import ReactGA from 'react-ga';
 
 import createStore from 'state';
 import history from 'utils/history';
@@ -32,6 +33,9 @@ const theme = createMuiTheme({
     useNextVariants: true,
   },
 });
+
+ReactGA.initialize('UA-52435052-4');
+history.listen(location => ReactGA.pageview(location.pathname));
 
 const Root = () => (
   <LocationProvider history={history}>

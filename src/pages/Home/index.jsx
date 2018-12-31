@@ -9,7 +9,7 @@ const Home = () => (
         Hello! Thank you for participating in unit elections with Tahosa Lodge.
       </h2>
       <p>
-        If your unit held an election in 2017, check your email for an invite,
+        If your unit held an election in 2018, check your email for an invite,
         so you can use your existing unit information.
         <br />
         Otherwise,&nbsp;

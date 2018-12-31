@@ -5,6 +5,7 @@ import apiRequest from 'utils/apiRequest';
 import normalize from 'utils/normalize';
 import { errorNotification } from 'state/modules/notification';
 import history from 'utils/history';
+import ReactGA from 'react-ga';
 
 export const actions = createActions('UNIT');
 
@@ -114,6 +115,10 @@ function* create({ payload }) {
   try {
     const { unit } = yield call(apiRequest, '/v1/unit', 'POST', payload);
     yield put(createSuccess(unit));
+    ReactGA.event({
+      category: 'Unit',
+      action: 'Created',
+    });
     history.navigate(`/units/${unit._id}/request-election`);
   } catch (error) {
     yield put(createFailure(error));
