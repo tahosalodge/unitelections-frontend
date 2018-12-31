@@ -1,8 +1,9 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
+import * as Sentry from '@sentry/browser';
+import ReactGA from 'react-ga';
 import apiRequest from 'utils/apiRequest';
 import { addNotification } from 'state/modules/notification';
 import history from 'utils/history';
-import ReactGA from 'react-ga';
 
 const initialState = {
   loggedIn: false,
@@ -204,10 +205,21 @@ function* resetPasswordSaga({ payload }) {
   }
 }
 
+function* setSentryScope({ payload: { user } }) {
+  yield Sentry.configureScope(scope => {
+    scope.setUser({
+      id: user._id,
+      email: user.email,
+    });
+  });
+}
+
 export function* saga() {
   yield checkToken();
   yield takeLatest(actions.register.request, registerSaga);
   yield takeLatest(actions.login.request, loginSaga);
   yield takeLatest(actions.logout, logoutSaga);
   yield takeLatest(actions.resetPassword.request, resetPasswordSaga);
+  yield takeLatest(actions.register.success, setSentryScope);
+  yield takeLatest(actions.login.success, setSentryScope);
 }

@@ -9,10 +9,12 @@ import { MuiPickersUtilsProvider } from 'material-ui-pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { SnackbarProvider } from 'notistack';
 import ReactGA from 'react-ga';
+import * as Sentry from '@sentry/browser';
 
 import createStore from 'state';
 import history from 'utils/history';
 import { ConnectedFeatureProvider } from 'utils/features';
+import ErrorBoundary from 'components/ErrorBoundary';
 import App from './App';
 
 import 'index.css';
@@ -34,8 +36,12 @@ const theme = createMuiTheme({
   },
 });
 
-ReactGA.initialize('UA-52435052-4');
+ReactGA.initialize(process.env.REACT_APP_ANALYTICS);
 history.listen(location => ReactGA.pageview(location.pathname));
+
+Sentry.init({
+  dsn: process.env.REACT_APP_SENTRY_DSN,
+});
 
 const Root = () => (
   <LocationProvider history={history}>
@@ -45,7 +51,9 @@ const Root = () => (
           <SnackbarProvider>
             <MuiThemeProvider theme={theme}>
               <CssBaseline />
-              <App />
+              <ErrorBoundary>
+                <App />
+              </ErrorBoundary>
             </MuiThemeProvider>
           </SnackbarProvider>
         </ConnectedFeatureProvider>

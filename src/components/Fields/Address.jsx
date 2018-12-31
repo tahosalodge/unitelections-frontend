@@ -55,7 +55,7 @@ const Address = ({ label, name, classes, notes }) => (
             multiline
             rowsMax="4"
             className={classes.inputs}
-            helperText="Any other details about your meeting location (where in a building, how to get in, etc)"
+            helperText="Please provide the name, and any other details about your meeting location (where in a building, how to get in, etc)"
           />
         </Grid>
       )}
