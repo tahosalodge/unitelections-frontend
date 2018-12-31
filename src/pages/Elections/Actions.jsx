@@ -43,7 +43,11 @@ const ElectionActions = ({
           <ListItemText primary="Edit Election" />
         </ListItem>
         <Feature name={IS_ADMIN}>
-          <Confirm button onClick={deleteElection} text="Delete Election" />
+          <Confirm
+            button
+            onClick={() => deleteElection(electionId)}
+            text="Delete Election"
+          />
         </Feature>
       </List>
     </div>
