@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as Sentry from '@sentry/browser';
+import { isRedirect } from '@reach/router';
 
 class ErrorBoundary extends React.Component {
   static propTypes = {
@@ -10,6 +11,9 @@ class ErrorBoundary extends React.Component {
   state = { error: null };
 
   componentDidCatch(error, errorInfo) {
+    if (isRedirect(error)) {
+      throw error;
+    }
     this.setState({ error });
     Sentry.withScope(scope => {
       Object.keys(errorInfo).forEach(key => {

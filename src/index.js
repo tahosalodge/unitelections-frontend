@@ -37,7 +37,7 @@ const theme = createMuiTheme({
 });
 
 ReactGA.initialize(process.env.REACT_APP_ANALYTICS);
-history.listen(location => ReactGA.pageview(location.pathname));
+history.listen(({ location }) => ReactGA.pageview(location.pathname));
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
