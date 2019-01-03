@@ -35,7 +35,7 @@ const styles = theme => ({
   },
   fab: {
     position: 'absolute',
-    bottom: theme.spacing.unit * 2,
+    bottom: theme.spacing.unit * 10,
     right: theme.spacing.unit * 2,
   },
 });
