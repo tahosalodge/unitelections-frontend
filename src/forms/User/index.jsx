@@ -87,12 +87,14 @@ const UserForm = ({
                             <Grid container key={index}>
                               <Grid item xs={2}>
                                 <SelectField
+                                  label="Type"
                                   name={`belongsTo[${index}].model`}
                                   options={['Unit', 'Chapter', 'Election']}
                                 />
                               </Grid>
-                              <Grid item xs={8}>
+                              <Grid item xs={6}>
                                 <SelectField
+                                  label="Organization"
                                   name={`belongsTo[${index}].organization`}
                                   options={selectItemsForModel(
                                     relationship.model,
@@ -106,6 +108,16 @@ const UserForm = ({
                                 />
                               </Grid>
                               <Grid item xs={2}>
+                                <SelectField
+                                  label="Administrator"
+                                  name={`belongsTo[${index}].canManage`}
+                                  options={[
+                                    { label: 'No', value: false },
+                                    { label: 'Yes', value: true },
+                                  ]}
+                                />
+                              </Grid>
+                              <Grid item xs={2}>
                                 <IconButton
                                   type="button"
                                   color="primary"
@@ -116,6 +128,16 @@ const UserForm = ({
                               </Grid>
                             </Grid>
                           ))}
+                      </Grid>
+                      <Grid item xs={12}>
+                        <SelectField
+                          label="Administrator"
+                          name="isAdmin"
+                          options={[
+                            { label: 'No', value: false },
+                            { label: 'Yes', value: true },
+                          ]}
+                        />
                       </Grid>
                       <Grid item xs={12}>
                         <Button

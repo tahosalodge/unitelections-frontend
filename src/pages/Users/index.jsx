@@ -70,6 +70,10 @@ class Users extends Component {
       ),
     },
     {
+      title: 'Status',
+      accessor: 'status',
+    },
+    {
       title: '',
       render: ({ _id }) => (
         <IconButton onClick={() => this.openActions(_id)}>
