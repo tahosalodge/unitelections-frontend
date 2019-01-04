@@ -22,6 +22,7 @@ const Users = lazy(() => import('pages/Users'));
 const CreateUser = lazy(() => import('pages/Users/Create'));
 const EditUser = lazy(() => import('pages/Users/Edit'));
 const ResetPassword = lazy(() => import('pages/ResetPassword'));
+const RequestNewPassword = lazy(() => import('components/Login/ResetPassword'));
 const ScheduleElection = lazy(() => import('forms/Election/Schedule'));
 
 const AdminRoutes = ({ auth, children }) => {
@@ -51,6 +52,7 @@ const Routes = ({ auth }) => (
       <Login path="/login" />
       <Register path="/register" />
       <Logout path="/logout" />
+      <RequestNewPassword path="/request-password" />
       <ResetPassword path="/reset-password/:email/:token" />
       <AdminRoutes path="/admin" auth={auth}>
         <Users path="users">

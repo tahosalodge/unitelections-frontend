@@ -1,4 +1,4 @@
-import { shape, bool, string } from 'prop-types';
+import { shape, bool, string, arrayOf } from 'prop-types';
 
 export const relationshipShape = shape({
   organization: string,
@@ -13,7 +13,7 @@ const userShape = shape({
   phone: string,
   email: string,
   password: string,
-  belongsTo: relationshipShape,
+  belongsTo: arrayOf(relationshipShape),
   isAdmin: bool,
 });
 

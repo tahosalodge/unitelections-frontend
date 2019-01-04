@@ -11,19 +11,27 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import TextField from 'components/Form/TextField';
-import { login } from 'state/modules/auth';
+import { login, requestNewPassword } from 'state/modules/auth';
 import authShape from 'shapes/auth';
 
-const Login = ({ fullScreen, ...props }) => {
+const RequestNewPassword = ({ fullScreen, ...props }) => {
   if (props.auth.loggedIn) {
     return <Redirect to="/dashboard" />;
   }
   return (
-    <Dialog fullScreen={fullScreen} open aria-labelledby="login">
-      <Formik onSubmit={values => props.login(values)}>
+    <Dialog
+      fullScreen={fullScreen}
+      open
+      aria-labelledby="requestNewPassword"
+      fullWidth
+      maxWidth="xs"
+    >
+      <Formik onSubmit={values => props.requestNewPassword(values)}>
         {({ handleSubmit }) => (
           <Form>
-            <DialogTitle id="login">Log In</DialogTitle>
+            <DialogTitle id="requestNewPassword">
+              Request New Password
+            </DialogTitle>
             <DialogContent>
               <TextField
                 autoFocus
@@ -33,18 +41,8 @@ const Login = ({ fullScreen, ...props }) => {
                 type="email"
                 fullWidth
               />
-              <TextField
-                margin="dense"
-                name="password"
-                label="Password"
-                type="password"
-                fullWidth
-              />
             </DialogContent>
             <DialogActions>
-              <Button component={Link} to="/request-password" color="primary">
-                Reset Password
-              </Button>
               <Button component={Link} to="/" color="primary">
                 Cancel
               </Button>
@@ -59,9 +57,10 @@ const Login = ({ fullScreen, ...props }) => {
   );
 };
 
-Login.propTypes = {
+RequestNewPassword.propTypes = {
   fullScreen: PropTypes.bool.isRequired,
   login: PropTypes.func.isRequired,
+  requestNewPassword: PropTypes.func.isRequired,
   auth: authShape.isRequired,
 };
 
@@ -72,7 +71,7 @@ const mapStateToProps = ({ auth }) => ({
 export default compose(
   connect(
     mapStateToProps,
-    { login }
+    { login, requestNewPassword }
   ),
   withMobileDialog()
-)(Login);
+)(RequestNewPassword);

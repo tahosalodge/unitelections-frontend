@@ -28,6 +28,7 @@ export const actions = {
     success: 'RESETPASS_SUCCESS',
     failure: 'RESETPASS_FAILURE',
   },
+  requestNewPassword: 'REQUEST_NEW_PASSWORD',
 };
 
 export function reducer(state = initialState, action) {
@@ -96,10 +97,21 @@ export function resetPassword(payload) {
     payload,
   };
 }
+
 function resetPasswordFailure(error) {
   return {
     type: actions.resetPassword.failure,
     error,
+  };
+}
+
+export function requestNewPassword({ email }) {
+  console.log(email);
+  return {
+    type: actions.requestNewPassword,
+    payload: {
+      email,
+    },
   };
 }
 
@@ -205,6 +217,33 @@ function* resetPasswordSaga({ payload }) {
   }
 }
 
+function* requestNewPasswordSaga({ payload }) {
+  try {
+    yield call(apiRequest, '/v1/user/create-reset-token', 'POST', payload);
+    ReactGA.event({
+      category: 'User',
+      action: 'Request new password',
+    });
+    yield put(
+      addNotification({
+        message: 'Please check your email to finish resetting your password.',
+        options: {
+          variant: 'success',
+        },
+      })
+    );
+  } catch (error) {
+    yield put(
+      addNotification({
+        message: error.message,
+        options: {
+          variant: 'error',
+        },
+      })
+    );
+  }
+}
+
 function* setSentryScope({ payload: { user } }) {
   yield Sentry.configureScope(scope => {
     scope.setUser({
@@ -222,4 +261,5 @@ export function* saga() {
   yield takeLatest(actions.resetPassword.request, resetPasswordSaga);
   yield takeLatest(actions.register.success, setSentryScope);
   yield takeLatest(actions.login.success, setSentryScope);
+  yield takeLatest(actions.requestNewPassword, requestNewPasswordSaga);
 }
