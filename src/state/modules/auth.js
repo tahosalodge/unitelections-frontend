@@ -106,7 +106,6 @@ function resetPasswordFailure(error) {
 }
 
 export function requestNewPassword({ email }) {
-  console.log(email);
   return {
     type: actions.requestNewPassword,
     payload: {
