@@ -100,7 +100,7 @@ class ScheduleElection extends React.Component {
                           name="date"
                           label="Election Date"
                           options={election.requestedDates.map(reqDate => ({
-                            label: format(reqDate, 'MMMM Do, YYYY', {
+                            label: format(reqDate, 'MMMM do, YYYY', {
                               awareOfUnicodeTokens: true,
                             }),
                             value: reqDate,

@@ -34,7 +34,7 @@ class Election extends React.Component {
                 <ul>
                   {election.requestedDates.map(reqDate => (
                     <li key={reqDate}>
-                      {format(reqDate, 'MMMM Do, YYYY', {
+                      {format(reqDate, 'MMMM do, YYYY', {
                         awareOfUnicodeTokens: true,
                       })}
                     </li>
@@ -45,7 +45,7 @@ class Election extends React.Component {
             {election && election.status !== 'Requested' && (
               <h3>
                 Date:
-                {format(election.date, 'MMMM Do, YYYY', {
+                {format(election.date, 'MMMM do, YYYY', {
                   awareOfUnicodeTokens: true,
                 })}
               </h3>
