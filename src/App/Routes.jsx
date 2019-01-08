@@ -9,6 +9,7 @@ const Election = lazy(() => import('pages/Election'));
 const Elections = lazy(() => import('pages/Elections'));
 const NewElection = lazy(() => import('forms/Election'));
 const Unit = lazy(() => import('pages/Unit'));
+const EditUnit = lazy(() => import('pages/Unit/Edit'));
 const NewUnit = lazy(() => import('pages/NewUnit'));
 const Units = lazy(() => import('pages/Units'));
 const Candidate = lazy(() => import('forms/Candidate'));
@@ -42,6 +43,7 @@ const Routes = ({ auth }) => (
       <NewElection path="/units/:unitId/request-election" />
       <Unit path="/units/:unitId">
         <ScheduleElection path="schedule-election" />
+        <EditUnit path="edit" />
       </Unit>
       <Units path="/units" />
       <NewUnit path="/units/new" />

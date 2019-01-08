@@ -18,6 +18,7 @@ import { selectUser } from 'selectors/user';
 import userShape from 'shapes/user';
 import { arrayOfSelections, arrayOfStrings } from 'shapes/fields';
 
+import validationSchema from './validationSchema';
 import {
   selectUnitsForDropdown,
   selectElectionsForDropdown,
@@ -42,7 +43,11 @@ const UserForm = ({
     onClose={() => navigate('/admin/users')}
     aria-labelledby={id}
   >
-    <Formik onSubmit={onSubmit} initialValues={user}>
+    <Formik
+      onSubmit={onSubmit}
+      initialValues={user}
+      validationSchema={validationSchema}
+    >
       {({ handleSubmit, values }) => (
         <Form>
           <DialogTitle id={id}>{title}</DialogTitle>

@@ -41,7 +41,7 @@ const UnitActions = ({
         >
           <ListItemText primary="Schedule Election" />
         </ListItem>
-        <ListItem button>
+        <ListItem button component={Link} to={`/units/${unitId}/edit`}>
           <ListItemText primary="Edit Unit" />
         </ListItem>
         <Feature name={IS_ADMIN}>

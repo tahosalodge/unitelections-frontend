@@ -9,11 +9,13 @@ import Grid from '@material-ui/core/Grid';
 import { createUnit } from 'state/modules/unit';
 import { getChapters } from 'selectors/auth';
 import { chapterShape } from 'shapes/auth';
+import { unitShape } from 'shapes/unit';
 import TextField from 'components/Fields/Text';
 import TimeField from 'components/Fields/Time';
 import AddressField from 'components/Fields/Address';
 import RepresentativeField from 'components/Fields/Representative';
 import SelectField from 'components/Fields/Select';
+import validationSchema from './validationSchema';
 
 const styles = theme => ({
   inputs: {
@@ -25,10 +27,11 @@ const styles = theme => ({
   },
 });
 
-const NewUnit = ({ classes, chapters, ...props }) => (
+const NewUnit = ({ classes, chapters, unit, ...props }) => (
   <Formik
     onSubmit={values => props.createUnit(values)}
-    initialValues={{ meetingTime: Date.now() }}
+    initialValues={{ meetingTime: Date.now(), ...unit }}
+    validationSchema={validationSchema}
   >
     {({ handleSubmit }) => (
       <Form>
@@ -128,6 +131,11 @@ const NewUnit = ({ classes, chapters, ...props }) => (
 NewUnit.propTypes = {
   createUnit: PropTypes.func.isRequired,
   chapters: chapterShape.isRequired,
+  unit: unitShape,
+};
+
+NewUnit.defaultProps = {
+  unit: {},
 };
 
 const mapStateToProps = state => ({

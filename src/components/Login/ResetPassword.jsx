@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Formik, Form } from 'formik';
 import { Link, Redirect } from '@reach/router';
+import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -13,6 +14,13 @@ import withMobileDialog from '@material-ui/core/withMobileDialog';
 import TextField from 'components/Form/TextField';
 import { login, requestNewPassword } from 'state/modules/auth';
 import authShape from 'shapes/auth';
+
+const validationSchema = yup.object().shape({
+  email: yup
+    .string()
+    .email()
+    .required(),
+});
 
 const RequestNewPassword = ({ fullScreen, ...props }) => {
   if (props.auth.loggedIn) {
@@ -26,7 +34,10 @@ const RequestNewPassword = ({ fullScreen, ...props }) => {
       fullWidth
       maxWidth="xs"
     >
-      <Formik onSubmit={values => props.requestNewPassword(values)}>
+      <Formik
+        onSubmit={values => props.requestNewPassword(values)}
+        validationSchema={validationSchema}
+      >
         {({ handleSubmit }) => (
           <Form>
             <DialogTitle id="requestNewPassword">
