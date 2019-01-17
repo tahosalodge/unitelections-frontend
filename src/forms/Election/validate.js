@@ -10,8 +10,8 @@ const validate = values => {
     }
   });
 
-  if (values.requestedDates.length < 2) {
-    errors.requestedDates = 'You must provide at least 2 dates.';
+  if (values.requestedDates.length < 3) {
+    errors.requestedDates = 'You must provide at least 3 dates.';
   }
 
   return errors;
