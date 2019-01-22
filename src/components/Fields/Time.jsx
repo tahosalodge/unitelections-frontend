@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FastField } from 'formik';
+import { zonedTimeToUtc } from 'date-fns-tz';
 import { TimePicker } from 'material-ui-pickers';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 
 const makeHandleChange = (name, setFieldValue) => value => {
-  setFieldValue(name, value);
+  setFieldValue(name, zonedTimeToUtc(value, 'America/Denver'));
 };
 
 const TimeField = props => (
@@ -31,8 +33,14 @@ const TimeField = props => (
   />
 );
 
+TimeField.propTypes = {
+  helperText: PropTypes.string,
+  type: PropTypes.string,
+};
+
 TimeField.defaultProps = {
   type: 'text',
+  helperText: '',
 };
 
 export default TimeField;

@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import format from 'date-fns/format';
+import { format } from 'date-fns-tz';
+import timeZone from 'constants/timeZone';
 import Page from 'components/Page';
 import Loading from 'components/Loading';
 import { getElection } from 'state/modules/election';
@@ -36,6 +37,7 @@ class Election extends React.Component {
                     <li key={reqDate}>
                       {format(reqDate, 'MMMM do, YYYY', {
                         awareOfUnicodeTokens: true,
+                        timeZone,
                       })}
                     </li>
                   ))}

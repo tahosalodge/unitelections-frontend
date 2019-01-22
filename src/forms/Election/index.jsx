@@ -21,7 +21,9 @@ const datePickerProps = {
 const NewElection = ({ unitId, ...props }) => (
   <Page title="Request Election">
     <Formik
-      onSubmit={values => props.createElection(values, unitId)}
+      onSubmit={values =>
+        console.log({ values }) || props.createElection(values, unitId)
+      }
       initialValues={{ requestedDates: [minDate], unitId, status: 'Requested' }}
       validate={validate}
     >

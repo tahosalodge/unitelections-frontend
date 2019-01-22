@@ -1,11 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { FastField } from 'formik';
 import { DatePicker } from 'material-ui-pickers';
+import { zonedTimeToUtc } from 'date-fns-tz';
 import ArrowLeft from '@material-ui/icons/ArrowLeft';
 import ArrowRight from '@material-ui/icons/ArrowRight';
 
 const makeHandleChange = (name, setFieldValue) => value => {
-  setFieldValue(name, value);
+  setFieldValue(name, zonedTimeToUtc(value, 'America/Denver'));
 };
 
 const DateField = props => (
@@ -27,8 +29,14 @@ const DateField = props => (
   />
 );
 
+DateField.propTypes = {
+  helperText: PropTypes.string,
+  type: PropTypes.string,
+};
+
 DateField.defaultProps = {
   type: 'text',
+  helperText: '',
 };
 
 export default DateField;

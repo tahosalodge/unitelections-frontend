@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Formik, Form } from 'formik';
-import format from 'date-fns/format';
+import { format } from 'date-fns-tz';
 import isWeekend from 'date-fns/isWeekend';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -14,6 +14,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import withMobileDialog from '@material-ui/core/withMobileDialog';
 import Grid from '@material-ui/core/Grid';
 
+import timeZone from 'constants/timeZone';
 import DateField from 'components/Fields/Date';
 import SelectField from 'components/Fields/Select';
 import { scheduleElection } from 'state/modules/election';
@@ -102,6 +103,7 @@ class ScheduleElection extends React.Component {
                           options={election.requestedDates.map(reqDate => ({
                             label: format(reqDate, 'MMMM do, YYYY', {
                               awareOfUnicodeTokens: true,
+                              timeZone,
                             }),
                             value: reqDate,
                           }))}

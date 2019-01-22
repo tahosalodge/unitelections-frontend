@@ -1,14 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import format from 'date-fns/format';
+import { format } from 'date-fns-tz';
 import IconButton from '@material-ui/core/IconButton';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import timeZone from 'constants/timeZone';
 import Page from 'components/Page';
 import Table from 'components/Table';
 import { selectElections } from 'selectors/election';
 import { listElections, deleteElection } from 'state/modules/election';
 import { arrayOfElections } from 'shapes/election';
+import Chapter from 'components/Chapter';
 import Actions from './Actions';
 
 class Elections extends React.Component {
@@ -29,6 +31,10 @@ class Elections extends React.Component {
         unitType && number ? `${unitType} ${number}` : '',
     },
     {
+      title: 'Chapter',
+      render: ({ chapter }) => <Chapter chapterId={chapter} suffix="" />,
+    },
+    {
       title: 'Status',
       accessor: 'status',
     },
@@ -39,7 +45,9 @@ class Elections extends React.Component {
     {
       title: 'Requested Dates',
       render: ({ requestedDates }) =>
-        requestedDates.map(d => format(d, 'MM/dd/yyyy')).join(', '),
+        requestedDates
+          .map(d => format(d, 'MM/dd/yyyy', { timeZone }))
+          .join(', '),
     },
     {
       title: '',

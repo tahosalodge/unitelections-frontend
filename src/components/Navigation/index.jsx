@@ -43,6 +43,13 @@ const Navigation = ({ classes, open, handleClose, auth }) => (
               >
                 <GroupIcon />
               </NavigationItem>
+              <NavigationItem
+                to="/admin/lodges"
+                label="Lodges"
+                onClick={handleClose}
+              >
+                <GroupIcon />
+              </NavigationItem>
             </Fragment>
           )}
         </Fragment>

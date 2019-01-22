@@ -1,14 +1,20 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getChapter } from 'selectors/auth';
 import { chapterShape } from 'shapes/auth';
 
-const Chapter = ({ chapter }) => (
-  <Fragment>{`${chapter.name} Chapter`}</Fragment>
+const Chapter = ({ chapter, suffix }) => (
+  <Fragment>{`${chapter.name} ${suffix}`}</Fragment>
 );
 
 Chapter.propTypes = {
   chapter: chapterShape.isRequired,
+  suffix: PropTypes.string,
+};
+
+Chapter.defaultProps = {
+  suffix: 'Chapter',
 };
 
 const mapStateToProps = (state, { chapterId }) => ({
