@@ -25,7 +25,7 @@ const validationSchema = yup.object().shape({
 
 const Login = ({ fullScreen, ...props }) => {
   if (props.auth.loggedIn) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/dashboard" noThrow />;
   }
   return (
     <Dialog fullScreen={fullScreen} open aria-labelledby="login">

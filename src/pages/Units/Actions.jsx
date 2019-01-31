@@ -10,14 +10,7 @@ import { Link } from '@reach/router';
 import { Feature, IS_ADMIN } from 'utils/features';
 import Confirm from 'components/Confirm';
 
-const UnitActions = ({
-  classes,
-  onClose,
-  selectedValue,
-  unitId,
-  deleteUnit,
-  ...other
-}) => (
+const UnitActions = ({ classes, onClose, unitId, deleteUnit, ...other }) => (
   <Dialog
     onClose={onClose}
     aria-labelledby="unit-actions-title"
@@ -58,7 +51,7 @@ const UnitActions = ({
 
 UnitActions.propTypes = {
   onClose: PropTypes.func.isRequired,
-  userId: PropTypes.string.isRequired,
+  unitId: PropTypes.string.isRequired,
   deleteUnit: PropTypes.func.isRequired,
 };
 

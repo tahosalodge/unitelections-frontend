@@ -24,7 +24,7 @@ const validationSchema = yup.object().shape({
 
 const RequestNewPassword = ({ fullScreen, ...props }) => {
   if (props.auth.loggedIn) {
-    return <Redirect to="/dashboard" />;
+    return <Redirect to="/dashboard" noThrow />;
   }
   return (
     <Dialog
