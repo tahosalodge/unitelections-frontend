@@ -12,10 +12,10 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Page from 'components/Page';
 import Table from 'components/Table';
 import { listUnits, deleteUnit } from 'state/modules/unit';
-import { getChapters } from 'selectors/auth';
 import createMapLink from 'utils/googleMapLink';
 import { arrayOfUnits } from 'shapes/unit';
-import { arrayOfChapters } from 'shapes/auth';
+import { getUnits } from 'selectors/unit';
+import Chapter from 'components/Chapter';
 import Actions from './Actions';
 
 const styles = theme => ({
@@ -29,7 +29,6 @@ const styles = theme => ({
 class Units extends React.Component {
   static propTypes = {
     units: arrayOfUnits.isRequired,
-    chapters: arrayOfChapters.isRequired,
     listUnits: PropTypes.func.isRequired,
     deleteUnit: PropTypes.func.isRequired,
   };
@@ -49,8 +48,7 @@ class Units extends React.Component {
     },
     {
       title: 'Chapter',
-      render: ({ chapter }) =>
-        this.props.chapters.find(c => c._id === chapter).name,
+      render: ({ chapter }) => <Chapter chapterId={chapter} suffix="" />,
     },
     {
       title: 'Location',
@@ -107,8 +105,7 @@ class Units extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  units: Object.values(state.unit.items),
-  chapters: getChapters(state),
+  units: getUnits(state),
 });
 
 export default compose(
