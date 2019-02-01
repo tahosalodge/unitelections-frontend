@@ -113,7 +113,10 @@ const deleteFailure = error => ({
 
 function* create({ payload }) {
   try {
-    const { unit } = yield call(apiRequest, '/v1/unit', 'POST', payload);
+    const { unit } = yield call(apiRequest, '/v1/unit', 'POST', {
+      ...payload,
+      activeMembers: parseInt(payload.activeMembers, 10),
+    });
     yield put(createSuccess(unit));
     ReactGA.event({
       category: 'Unit',
