@@ -41,6 +41,7 @@ history.listen(({ location }) => ReactGA.pageview(location.pathname));
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
+  environment: process.env.NODE_ENV,
 });
 
 const Root = () => (
