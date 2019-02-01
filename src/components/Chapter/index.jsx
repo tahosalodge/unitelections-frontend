@@ -4,9 +4,12 @@ import { connect } from 'react-redux';
 import { getChapter } from 'selectors/auth';
 import { chapterShape } from 'shapes/auth';
 
-const Chapter = ({ chapter, suffix }) => (
-  <Fragment>{`${chapter.name} ${suffix}`}</Fragment>
-);
+const Chapter = ({ chapter, suffix }) => {
+  if (!chapter) {
+    return null;
+  }
+  return <Fragment>{`${chapter.name} ${suffix}`}</Fragment>;
+};
 
 Chapter.propTypes = {
   chapter: chapterShape.isRequired,
