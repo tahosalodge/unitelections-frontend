@@ -8,6 +8,8 @@ import { actions as unitActions } from 'state/modules/unit';
 
 import { actions as userActions } from 'state/modules/user';
 
+import { actions as candidateActions } from 'state/modules/candidate';
+
 /**
  * Utility function to making a simple reducer to swap the loading indicator status.
  *
@@ -114,6 +116,26 @@ export default combineReducers({
       unitActions.update.failure,
       unitActions.get.failure,
       unitActions.create.failure,
+    ]
+  ),
+  candidate: makeMultiActionReducer(
+    [
+      candidateActions.list.request,
+      candidateActions.update.request,
+      candidateActions.get.request,
+      candidateActions.create.request,
+    ],
+    [
+      candidateActions.list.success,
+      candidateActions.update.success,
+      candidateActions.get.success,
+      candidateActions.create.success,
+    ],
+    [
+      candidateActions.list.failure,
+      candidateActions.update.failure,
+      candidateActions.get.failure,
+      candidateActions.create.failure,
     ]
   ),
 });
