@@ -4,10 +4,14 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import TextField from './Text';
 
-const Address = ({ label, name, classes, notes }) => (
+const Address = ({ label, name, classes, notes, showLabel }) => (
   <Fragment>
-    <br />
-    <Typography variant="body1">{label}</Typography>
+    {showLabel && (
+      <Fragment>
+        <br />
+        <Typography variant="body1">{label}</Typography>
+      </Fragment>
+    )}
     <Grid container spacing={24}>
       <Grid item xs={12}>
         <TextField
@@ -64,13 +68,16 @@ const Address = ({ label, name, classes, notes }) => (
 );
 
 Address.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
   name: PropTypes.string.isRequired,
   notes: PropTypes.bool,
+  showLabel: PropTypes.bool,
 };
 
 Address.defaultProps = {
   notes: false,
+  showLabel: true,
+  label: '',
 };
 
 export default Address;
