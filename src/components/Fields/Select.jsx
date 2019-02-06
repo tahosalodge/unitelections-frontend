@@ -37,9 +37,11 @@ const SelectField = ({ options, label, className, fast, ...props }) => {
             )
           )}
       </Select>
-      {(errors[field.name] || props.helperText) && (
+      {((touched[field.name] && errors[field.name]) || props.helperText) && (
         <FormHelperText>
-          {errors[field.name] ? errors[field.name] : props.helperText}
+          {touched[field.name] && errors[field.name]
+            ? errors[field.name]
+            : props.helperText}
         </FormHelperText>
       )}
     </FormControl>
