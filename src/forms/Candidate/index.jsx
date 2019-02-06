@@ -14,8 +14,8 @@ import DateField from 'components/Fields/Date';
 import AddressField from 'components/Fields/Address';
 import SelectField from 'components/Fields/Select';
 import { rank } from 'constants/fields';
-import { electionShape } from 'shapes/election';
 import { candidateShape } from 'shapes/candidate';
+import validationSchema from './validationSchema';
 
 const styles = theme => ({
   inputs: {
@@ -31,8 +31,9 @@ const CandidateForm = ({ classes, cancelPath, initialValues, ...props }) => (
   <Formik
     onSubmit={values => props.onSave(values)}
     initialValues={initialValues}
+    validationSchema={validationSchema}
   >
-    {({ handleSubmit }) => (
+    {({ handleSubmit, isValid }) => (
       <Form>
         <DialogTitle id="add-candidate-title">Add Candidate</DialogTitle>
         <DialogContent>
@@ -122,7 +123,12 @@ const CandidateForm = ({ classes, cancelPath, initialValues, ...props }) => (
           <Button type="button" component={Link} to={cancelPath}>
             Cancel
           </Button>
-          <Button type="submit" onClick={handleSubmit} color="primary">
+          <Button
+            type="submit"
+            onClick={handleSubmit}
+            color="primary"
+            disabled={!isValid}
+          >
             Add Candidate
           </Button>
         </DialogActions>
@@ -133,7 +139,6 @@ const CandidateForm = ({ classes, cancelPath, initialValues, ...props }) => (
 
 CandidateForm.propTypes = {
   onSave: PropTypes.func.isRequired,
-  election: electionShape.isRequired,
   cancelPath: PropTypes.string.isRequired,
   initialValues: candidateShape.isRequired,
 };

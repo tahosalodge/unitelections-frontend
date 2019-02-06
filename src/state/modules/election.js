@@ -6,6 +6,7 @@ import normalize from 'utils/normalize';
 import { errorNotification } from 'state/modules/notification';
 import history from 'utils/history';
 import ReactGA from 'react-ga';
+import { getUnit } from './unit';
 
 export const actions = createActions('ELECTION');
 
@@ -147,6 +148,7 @@ function* get({ payload: { electionId } }) {
   try {
     const { election } = yield call(apiRequest, `/v1/election/${electionId}`);
     yield put(getSuccess(election));
+    yield put(getUnit(election.unit));
   } catch (error) {
     yield put(getFailure(error));
     yield put(errorNotification(error));

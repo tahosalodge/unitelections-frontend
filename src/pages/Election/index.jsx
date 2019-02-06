@@ -7,11 +7,14 @@ import { getElection } from 'state/modules/election';
 import { listCandidates } from 'state/modules/candidate';
 import { selectElection } from 'selectors/election';
 import { electionShape } from 'shapes/election';
-import { selectCandidates } from 'selectors/candidate';
+import { selectCandidatesForElection } from 'selectors/candidate';
+import { selectUnitForElection } from 'selectors/unit';
 import Tabs from 'components/Tabs';
 import { arrayOfCandidates } from 'shapes/candidate';
+import { unitShape } from 'shapes/unit';
 import ElectionOverview from './Overview';
 import ElectionCandidates from './Candidates';
+import ElectionUnitInformation from './Unit';
 
 const AddCandidate = lazy(() => import('./AddCandidate'));
 
@@ -24,6 +27,7 @@ class Election extends React.Component {
     election: electionShape.isRequired,
     children: PropTypes.node.isRequired,
     candidates: arrayOfCandidates.isRequired,
+    unit: unitShape.isRequired,
   };
 
   componentDidMount() {
@@ -33,58 +37,68 @@ class Election extends React.Component {
   }
 
   render() {
-    const { election, loading, children, electionId, candidates } = this.props;
+    const {
+      election,
+      loading,
+      children,
+      electionId,
+      candidates,
+      unit,
+    } = this.props;
     return (
-      <Fragment>
-        {election && <ElectionOverview election={election} />}
-        <Tabs
-          value={this.props['*'] || 'overview'}
-          tabs={[
-            {
-              label: 'Overview',
-              path: 'overview',
-            },
-            {
-              label: 'Candidates',
-              path: 'candidates',
-            },
-            // {
-            //   label: 'Nominations',
-            //   path: 'nominations',
-            // },
-            // {
-            //   label: 'Report',
-            //   path: 'report',
-            // },
-          ]}
-        />
-        <Loading loading={loading}>
-          <Router>
-            <ElectionOverview election={election} path="overview" />
-            <ElectionCandidates
-              election={election}
-              candidates={candidates}
-              path="candidates"
+      <Loading loading={loading}>
+        {election && (
+          <Fragment>
+            <ElectionOverview election={election} />
+            <Tabs
+              value={this.props['*'] || 'overview'}
+              tabs={[
+                {
+                  label: 'Candidates',
+                  path: 'candidates',
+                },
+                {
+                  label: 'Unit',
+                  path: 'unit',
+                },
+                // {
+                //   label: 'Report',
+                //   path: 'report',
+                // },
+              ]}
             />
-            <AddCandidate election={election} path="candidates/new" />
+            <Router>
+              <ElectionCandidates
+                election={election}
+                candidates={candidates}
+                path="candidates"
+              />
+              <ElectionUnitInformation
+                election={election}
+                unit={unit}
+                path="unit"
+              />
+              <AddCandidate election={election} path="candidates/new" />
 
-            <Redirect
-              from={`/elections/${electionId}`}
-              to={`/elections/${electionId}/overview`}
-              default
-              noThrow
-            />
-          </Router>
-          {children}
-        </Loading>
-      </Fragment>
+              <Redirect
+                from={`/elections/${electionId}`}
+                to={`/elections/${electionId}/overview`}
+                default
+                noThrow
+              />
+            </Router>
+          </Fragment>
+        )}
+        {children}
+      </Loading>
     );
   }
 }
 
 const mapStateToProps = (state, props) => ({
   election: selectElection(state, props),
-  candidates: selectCandidates(state),
+  candidates: selectCandidatesForElection(state, props),
+  unit: selectUnitForElection(state, selectElection(state, props)),
   loading: state.loading.election,
 });
 

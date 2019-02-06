@@ -5,7 +5,7 @@ import { format } from 'date-fns-tz';
 import { electionShape } from 'shapes/election';
 
 const ElectionOverview = ({ election }) => (
-  <Page title="Election" fullwidth>
+  <Page title={`Election - ${election.status}`} fullwidth>
     {election.status === 'Requested' && (
       <Fragment>
         <h4>Requested Dates</h4>
