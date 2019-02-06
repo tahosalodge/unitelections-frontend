@@ -33,7 +33,7 @@ const NewUnit = ({ classes, chapters, unit, ...props }) => (
     initialValues={{ meetingTime: Date.now(), ...unit }}
     validationSchema={validationSchema}
   >
-    {({ handleSubmit }) => (
+    {({ handleSubmit, isValid }) => (
       <Form>
         <Grid container spacing={24}>
           <Grid item xs={12} sm={6}>
@@ -118,6 +118,7 @@ const NewUnit = ({ classes, chapters, unit, ...props }) => (
               variant="contained"
               color="secondary"
               className={classes.submit}
+              disabled={!isValid}
             >
               Create Unit
             </Button>
