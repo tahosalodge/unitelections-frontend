@@ -7,7 +7,7 @@ const Dialog = ({
   fullScreen,
   fullWidth,
   maxWidth,
-  labelId,
+  titleId,
   children,
   ...props
 }) => (
@@ -16,7 +16,7 @@ const Dialog = ({
     open
     fullWidth={fullWidth}
     maxWidth={maxWidth}
-    aria-labelledby={labelId}
+    aria-labelledby={titleId}
     {...props}
   >
     {children}
@@ -27,7 +27,7 @@ Dialog.propTypes = {
   fullScreen: PropTypes.bool,
   fullWidth: PropTypes.bool,
   maxWidth: PropTypes.string,
-  labelId: PropTypes.string.isRequired,
+  titleId: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
 
