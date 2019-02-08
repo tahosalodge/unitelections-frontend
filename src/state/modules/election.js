@@ -137,7 +137,7 @@ function* create({ payload }) {
       category: 'Election',
       action: payload.status,
     });
-    history.navigate(`/units/${election.unit}`);
+    history.navigate(`/elections/${election._id}`);
   } catch (error) {
     yield put(createFailure(error));
     yield put(errorNotification(error));

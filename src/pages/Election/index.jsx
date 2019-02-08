@@ -1,7 +1,8 @@
-import React, { Fragment, lazy } from 'react';
+import React, { lazy } from 'react';
 import PropTypes from 'prop-types';
 import { Router, Redirect } from '@reach/router';
 import { connect } from 'react-redux';
+import Paper from '@material-ui/core/Paper';
 import Loading from 'components/Loading';
 import { getElection } from 'state/modules/election';
 import { listCandidates } from 'state/modules/candidate';
@@ -16,6 +17,7 @@ import ElectionOverview from './Overview';
 import ElectionCandidates from './Candidates';
 import ElectionUnitInformation from './Unit';
 
+const ScheduleElection = lazy(() => import('forms/Election/Schedule'));
 const AddCandidate = lazy(() => import('./AddCandidate'));
 
 class Election extends React.Component {
@@ -47,8 +49,8 @@ class Election extends React.Component {
     } = this.props;
     return (
       <Loading loading={loading}>
-        {election && (
-          <Fragment>
+        {election && unit && (
+          <Paper>
             <ElectionOverview election={election} />
             <Tabs
               value={this.props['*'] || 'overview'}
@@ -78,7 +80,12 @@ class Election extends React.Component {
                 unit={unit}
                 path="unit"
               />
-              <AddCandidate election={election} path="candidates/new" />
+              <AddCandidate
+                election={election}
+                unitType={unit.unitType}
+                path="candidates/new"
+              />
+              <ScheduleElection path="schedule" />
 
               <Redirect
                 from={`/elections/${electionId}`}
@@ -87,7 +94,7 @@ class Election extends React.Component {
                 noThrow
               />
             </Router>
-          </Fragment>
+          </Paper>
         )}
         {children}
       </Loading>

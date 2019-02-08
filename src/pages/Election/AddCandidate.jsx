@@ -9,12 +9,13 @@ import { electionShape } from 'shapes/election';
 
 const AddCandidate = ({
   election: { _id: electionId, unit, chapter },
+  unitType,
   ...props
 }) => (
   <Dialog titleId="add-candidate-title" maxWidth="sm">
     <CandidateForm
       onSave={props.createCandidate}
-      initialValues={{ election: electionId, unit, chapter }}
+      initialValues={{ election: electionId, unit, chapter, unitType }}
       cancelPath={`/elections/${electionId}/candidates`}
     />
   </Dialog>
@@ -23,6 +24,7 @@ const AddCandidate = ({
 AddCandidate.propTypes = {
   election: electionShape.isRequired,
   createCandidate: PropTypes.func.isRequired,
+  unitType: PropTypes.string.isRequired,
 };
 
 export default compose(

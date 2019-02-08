@@ -13,7 +13,7 @@ import TextField from 'components/Fields/Text';
 import DateField from 'components/Fields/Date';
 import AddressField from 'components/Fields/Address';
 import SelectField from 'components/Fields/Select';
-import { rank } from 'constants/fields';
+import { rank, gender } from 'constants/fields';
 import { candidateShape } from 'shapes/candidate';
 import validationSchema from './validationSchema';
 
@@ -33,7 +33,7 @@ const CandidateForm = ({ classes, cancelPath, initialValues, ...props }) => (
     initialValues={initialValues}
     validationSchema={validationSchema}
   >
-    {({ handleSubmit, isValid }) => (
+    {({ handleSubmit, isValid, values }) => (
       <Form>
         <DialogTitle id="add-candidate-title">Add Candidate</DialogTitle>
         <DialogContent>
@@ -75,6 +75,22 @@ const CandidateForm = ({ classes, cancelPath, initialValues, ...props }) => (
               />
             </Grid>
             <Grid item xs={6}>
+              <SelectField
+                name="rank"
+                label="Rank"
+                options={rank[values.unitType]}
+                className={classes.inputs}
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <SelectField
+                name="gender"
+                label="Gender"
+                options={gender}
+                className={classes.inputs}
+              />
+            </Grid>
+            <Grid item xs={6}>
               <TextField
                 name="parentPhone"
                 label="Parent Phone"
@@ -107,14 +123,6 @@ const CandidateForm = ({ classes, cancelPath, initialValues, ...props }) => (
                 name="address"
                 classes={classes}
                 showLabel={false}
-              />
-            </Grid>
-            <Grid item xs={6}>
-              <SelectField
-                name="rank"
-                label="Rank"
-                options={rank.troop}
-                className={classes.inputs}
               />
             </Grid>
           </Grid>
