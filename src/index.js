@@ -42,6 +42,7 @@ history.listen(({ location }) => ReactGA.pageview(location.pathname));
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
   environment: process.env.NODE_ENV,
+  release: `unitelections-frontend@${process.env.COMMIT_REF}`,
 });
 
 const Root = () => (
