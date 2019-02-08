@@ -36,7 +36,7 @@ const AdminRoutes = ({ auth, children }) => {
 const Routes = ({ auth }) => (
   <Router>
     <Suspense default fallback={<CircularProgress />}>
-      <Election path="/elections/:electionId" />
+      <Election path="/elections/:electionId/*" />
       <Elections path="/elections" />
       <NewElection path="/units/:unitId/request-election" />
       <Unit path="/units/:unitId">

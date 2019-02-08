@@ -89,7 +89,7 @@ class Election extends React.Component {
 
               <Redirect
                 from={`/elections/${electionId}`}
-                to={`/elections/${electionId}/overview`}
+                to={`/elections/${electionId}/candidates`}
                 default
                 noThrow
               />
