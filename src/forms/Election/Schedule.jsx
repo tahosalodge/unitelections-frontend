@@ -62,7 +62,7 @@ class ScheduleElection extends React.Component {
           onSubmit={values => props.scheduleElection(values)}
           initialValues={{ ...election, status: 'Scheduled' }}
         >
-          {({ handleSubmit }) => (
+          {({ handleSubmit, isValid }) => (
             <Form>
               <DialogTitle id="scheduleElection">Schedule Election</DialogTitle>
               <DialogContent>
@@ -125,7 +125,12 @@ class ScheduleElection extends React.Component {
                 <Button onClick={() => window.history.back()} color="primary">
                   Cancel
                 </Button>
-                <Button type="submit" onClick={handleSubmit} color="primary">
+                <Button
+                  type="submit"
+                  onClick={handleSubmit}
+                  color="primary"
+                  disabled={!isValid}
+                >
                   Schedule Election
                 </Button>
               </DialogActions>

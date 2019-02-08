@@ -10,7 +10,11 @@ const TextField = props => (
         {...props}
         {...field}
         error={touched[field.name] && !!errors[field.name]}
-        helperText={errors[field.name] ? errors[field.name] : props.helperText}
+        helperText={
+          touched[field.name] && errors[field.name]
+            ? errors[field.name]
+            : props.helperText
+        }
         value={field.value || ''}
       />
     )}

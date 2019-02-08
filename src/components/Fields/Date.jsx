@@ -22,7 +22,9 @@ const DateField = props => (
         leftArrowIcon={<ArrowLeft />}
         rightArrowIcon={<ArrowRight />}
         error={touched[field.name] && errors[field.name]}
-        helperText={errors[field.name] || props.helperText}
+        helperText={
+          (touched[field.name] && errors[field.name]) || props.helperText
+        }
         onChange={makeHandleChange(field.name, setFieldValue)}
       />
     )}

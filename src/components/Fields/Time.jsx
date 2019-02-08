@@ -23,7 +23,11 @@ const TimeField = props => (
         keyboard
         mask={[/\d/, /\d/, ':', /\d/, /\d/, ' ', /a|p/i, 'M']}
         error={touched[field.name] && !!errors[field.name]}
-        helperText={errors[field.name] ? errors[field.name] : props.helperText}
+        helperText={
+          touched[field.name] && errors[field.name]
+            ? errors[field.name]
+            : props.helperText
+        }
         disabled={disabled}
         value={field.value || ''}
         onChange={makeHandleChange(field.name, setFieldValue)}

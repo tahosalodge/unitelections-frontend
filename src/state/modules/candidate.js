@@ -6,11 +6,8 @@ import normalize from 'utils/normalize';
 import { errorNotification } from 'state/modules/notification';
 import history from 'utils/history';
 import ReactGA from 'react-ga';
-import { getUnit } from './unit';
 
-export const actions = createActions('ELECTION');
-
-const SCHEDULE_ELECTION = 'SCHEDULE_ELECTION';
+export const actions = createActions('CANDIDATE');
 
 const initialState = {
   items: {},
@@ -18,18 +15,15 @@ const initialState = {
 
 export const reducer = createReducer(actions, initialState);
 
-export const createElection = (payload, unit) => ({
+export const createCandidate = payload => ({
   type: actions.create.request,
-  payload: {
-    ...payload,
-    unit,
-  },
+  payload,
 });
 
-const createSuccess = election => ({
+const createSuccess = candidate => ({
   type: actions.create.success,
   payload: {
-    item: election,
+    item: candidate,
   },
 });
 
@@ -40,14 +34,14 @@ const createFailure = error => ({
   },
 });
 
-export const listElections = () => ({
+export const listCandidates = () => ({
   type: actions.list.request,
 });
 
-const listSuccess = elections => ({
+const listSuccess = candidates => ({
   type: actions.list.success,
   payload: {
-    items: normalize(elections, '_id'),
+    items: normalize(candidates, '_id'),
   },
 });
 
@@ -58,17 +52,17 @@ const listFailure = error => ({
   },
 });
 
-export const getElection = electionId => ({
+export const getCandidate = candidateId => ({
   type: actions.get.request,
   payload: {
-    electionId,
+    candidateId,
   },
 });
 
-const getSuccess = election => ({
+const getSuccess = candidate => ({
   type: actions.get.success,
   payload: {
-    item: election,
+    item: candidate,
   },
 });
 
@@ -79,18 +73,15 @@ const getFailure = error => ({
   },
 });
 
-export const updateElection = (id, patch) => ({
+export const updateCandidate = payload => ({
   type: actions.update.request,
-  payload: {
-    id,
-    patch,
-  },
+  payload,
 });
 
-const updateSuccess = election => ({
+const updateSuccess = candidate => ({
   type: actions.update.success,
   payload: {
-    item: election,
+    item: candidate,
   },
 });
 
@@ -101,7 +92,7 @@ const updateFailure = error => ({
   },
 });
 
-export const deleteElection = id => ({
+export const deleteCandidate = id => ({
   type: actions.delete.request,
   payload: { id },
 });
@@ -120,35 +111,30 @@ const deleteFailure = error => ({
   },
 });
 
-export const scheduleElection = election => ({
-  type: SCHEDULE_ELECTION,
-  payload: {
-    election,
-  },
-});
-
 function* create({ payload }) {
   try {
-    const { election } = yield call(apiRequest, '/v1/election', 'POST', {
+    const { candidate } = yield call(apiRequest, '/v1/candidate', 'POST', {
       ...payload,
     });
-    yield put(createSuccess(election));
+    yield put(createSuccess(candidate));
     ReactGA.event({
-      category: 'Election',
-      action: payload.status,
+      category: 'Candidate',
+      action: 'Created',
     });
-    history.navigate(`/elections/${election._id}`);
+    history.navigate(`/elections/${candidate.election}/candidates`);
   } catch (error) {
     yield put(createFailure(error));
     yield put(errorNotification(error));
   }
 }
 
-function* get({ payload: { electionId } }) {
+function* get({ payload: { candidateId } }) {
   try {
-    const { election } = yield call(apiRequest, `/v1/election/${electionId}`);
-    yield put(getSuccess(election));
-    yield put(getUnit(election.unit));
+    const { candidate } = yield call(
+      apiRequest,
+      `/v1/candidate/${candidateId}`
+    );
+    yield put(getSuccess(candidate));
   } catch (error) {
     yield put(getFailure(error));
     yield put(errorNotification(error));
@@ -157,17 +143,13 @@ function* get({ payload: { electionId } }) {
 
 function* update({ payload: { id, patch } }) {
   try {
-    const { election } = yield call(
+    const { candidate } = yield call(
       apiRequest,
-      `/v1/election/${id}`,
+      `/v1/candidate/${id}`,
       'PATCH',
       patch
     );
-    ReactGA.event({
-      category: 'Election',
-      action: 'Scheduled',
-    });
-    yield put(updateSuccess(election));
+    yield put(updateSuccess(candidate));
   } catch (error) {
     yield put(updateFailure(error));
     yield put(errorNotification(error));
@@ -176,7 +158,7 @@ function* update({ payload: { id, patch } }) {
 
 function* remove({ payload: { id } }) {
   try {
-    yield call(apiRequest, `/v1/election/${id}`, 'DELETE');
+    yield call(apiRequest, `/v1/candidate/${id}`, 'DELETE');
     yield put(deleteSuccess(id));
   } catch (error) {
     yield put(deleteFailure(error));
@@ -186,22 +168,10 @@ function* remove({ payload: { id } }) {
 
 function* list() {
   try {
-    const { elections } = yield call(apiRequest, '/v1/election');
-    yield put(listSuccess(elections));
+    const { candidates } = yield call(apiRequest, '/v1/candidate');
+    yield put(listSuccess(candidates));
   } catch (error) {
     yield put(listFailure(error));
-    yield put(errorNotification(error));
-  }
-}
-
-function* schedule({ payload: { election } }) {
-  try {
-    if (election._id) {
-      yield put(updateElection(election._id, election));
-    } else {
-      yield put(createElection(election));
-    }
-  } catch (error) {
     yield put(errorNotification(error));
   }
 }
@@ -212,5 +182,4 @@ export function* saga() {
   yield takeLatest(actions.get.request, get);
   yield takeLatest(actions.update.request, update);
   yield takeLatest(actions.delete.request, remove);
-  yield takeLatest(SCHEDULE_ELECTION, schedule);
 }

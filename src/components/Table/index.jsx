@@ -29,7 +29,7 @@ const CustomTable = ({ classes, data, columns }) => (
         </TableRow>
       </TableHead>
       <TableBody>
-        {data.length > 0 &&
+        {data.length > 0 ? (
           data.map(row => (
             <TableRow key={row._id}>
               {columns.map(column => (
@@ -40,7 +40,12 @@ const CustomTable = ({ classes, data, columns }) => (
                 />
               ))}
             </TableRow>
-          ))}
+          ))
+        ) : (
+          <TableRow>
+            <TableCell>There's nothing to show here.</TableCell>
+          </TableRow>
+        )}
       </TableBody>
     </Table>
   </div>

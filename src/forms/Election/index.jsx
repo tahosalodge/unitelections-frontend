@@ -25,7 +25,7 @@ const NewElection = ({ unitId, ...props }) => (
       initialValues={{ requestedDates: [minDate], unitId, status: 'Requested' }}
       validate={validate}
     >
-      {({ handleSubmit, values }) => (
+      {({ handleSubmit, values, isValid }) => (
         <Form>
           <Grid container spacing={24}>
             <FieldArray
@@ -78,6 +78,7 @@ const NewElection = ({ unitId, ...props }) => (
                 onClick={handleSubmit}
                 variant="contained"
                 color="secondary"
+                disabled={!isValid}
               >
                 Request Election
               </Button>
