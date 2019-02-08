@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from '@reach/router';
 import { format } from 'date-fns-tz';
 import IconButton from '@material-ui/core/IconButton';
 import MoreIcon from '@material-ui/icons/MoreVert';
@@ -27,8 +28,12 @@ class Elections extends React.Component {
   columns = [
     {
       title: 'Unit',
-      render: ({ unit: { unitType, number } }) =>
-        unitType && number ? `${unitType} ${number}` : '',
+      render: ({ unit: { unitType, number }, _id: electionId }) =>
+        unitType && number ? (
+          <Link to={`/elections/${electionId}`}>{`${unitType} ${number}`}</Link>
+        ) : (
+          ''
+        ),
     },
     {
       title: 'Chapter',
@@ -77,7 +82,7 @@ class Elections extends React.Component {
     const { elections } = this.props;
     const { actions } = this.state;
     return (
-      <Page title="Elections">
+      <Page title="Elections" fullwidth>
         <Actions
           electionId={actions}
           onClose={this.closeActions}
