@@ -6,6 +6,7 @@ import Chapter from 'components/Chapter';
 import { selectUnit } from 'selectors/unit';
 import { getUnit } from 'state/modules/unit';
 import { unitShape } from 'shapes/unit';
+import UnitDetails from 'components/Unit';
 
 class Unit extends React.Component {
   static propTypes = {
@@ -33,6 +34,7 @@ class Unit extends React.Component {
     return (
       <Page title={`${unitType} ${number}`}>
         <Chapter chapterId={chapter} />
+        <UnitDetails unit={this.props.unit} />
         {children}
       </Page>
     );

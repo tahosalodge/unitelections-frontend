@@ -13,3 +13,14 @@ export const getManageableChapters = state =>
   );
 
 export const getIsAdmin = state => get(state.auth, ['user', 'isAdmin'], false);
+
+export const getCanReportElection = (state, { electionId }) => {
+  const manageableChapters = getManageableChapters(state);
+  const isAdmin = getIsAdmin(state);
+  const canManageChapter = manageableChapters.includes(electionId);
+  if (isAdmin || canManageChapter) {
+    return true;
+  }
+
+  return false;
+};

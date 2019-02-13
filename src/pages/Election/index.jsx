@@ -13,6 +13,7 @@ import { selectUnitForElection } from 'selectors/unit';
 import Tabs from 'components/Tabs';
 import { arrayOfCandidates } from 'shapes/candidate';
 import { unitShape } from 'shapes/unit';
+import { getCanReportElection } from 'selectors/auth';
 import ElectionOverview from './Overview';
 import ElectionCandidates from './Candidates';
 import ElectionUnitInformation from './Unit';
@@ -31,6 +32,7 @@ class Election extends React.Component {
     children: PropTypes.node.isRequired,
     candidates: arrayOfCandidates.isRequired,
     unit: unitShape.isRequired,
+    canReportElection: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
@@ -38,6 +40,29 @@ class Election extends React.Component {
     this.props.getElection(electionId);
     this.props.listCandidates(electionId);
   }
+
+  getTabs = () => {
+    const { canReportElection } = this.props;
+    const tabs = [
+      {
+        label: 'Candidates',
+        path: 'candidates',
+      },
+      {
+        label: 'Unit',
+        path: 'unit',
+      },
+    ];
+
+    if (canReportElection) {
+      tabs.push({
+        label: 'Report',
+        path: 'report',
+      });
+    }
+
+    return tabs;
+  };
 
   render() {
     const {
@@ -54,21 +79,8 @@ class Election extends React.Component {
           <Paper>
             <ElectionOverview election={election} />
             <Tabs
-              value={this.props['*'] || 'overview'}
-              tabs={[
-                {
-                  label: 'Candidates',
-                  path: 'candidates',
-                },
-                {
-                  label: 'Unit',
-                  path: 'unit',
-                },
-                {
-                  label: 'Report',
-                  path: 'report',
-                },
-              ]}
+              value={this.props['*'] || 'candidates'}
+              tabs={this.getTabs()}
             />
             <Router>
               <ElectionCandidates
@@ -113,6 +125,7 @@ const mapStateToProps = (state, props) => ({
   candidates: selectCandidatesForElection(state, props),
   unit: selectUnitForElection(state, selectElection(state, props)),
   loading: state.loading.election,
+  canReportElection: getCanReportElection(state, props),
 });
 
 export default connect(
