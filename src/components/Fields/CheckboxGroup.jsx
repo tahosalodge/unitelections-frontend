@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FieldArray } from 'formik';
+import { Field } from 'formik';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-const CheckboxGroup = ({ values, options, name, getLabel, classes }) => (
-  <FieldArray
+const CheckboxGroup = ({ options, name, getLabel, classes }) => (
+  <Field
     name={name}
-    render={arrayHelpers => (
+    render={({ field, form: { setFieldValue, values } }) => (
       <FormControl component="fieldset" className={classes.formControl}>
         <FormLabel component="legend">Elected Candidates</FormLabel>
         <FormGroup>
@@ -20,19 +20,28 @@ const CheckboxGroup = ({ values, options, name, getLabel, classes }) => (
                 name={name}
                 type="checkbox"
                 value={option._id}
-                checked={values[name].includes(option._id)}
+                checked={values[name][option._id]}
                 onChange={e => {
                   if (e.target.checked) {
-                    arrayHelpers.push(option._id);
+                    setFieldValue(field.name, {
+                      ...values[name],
+                      [option._id]: true,
+                    });
                   } else {
-                    const idx = values[name].indexOf(option._id);
-                    arrayHelpers.remove(idx);
+                    setFieldValue(field.name, {
+                      ...values[name],
+                      [option._id]: false,
+                    });
                   }
                 }}
               />
             );
             return (
-              <FormControlLabel control={control} label={getLabel(option)} />
+              <FormControlLabel
+                key={option.bsaid}
+                control={control}
+                label={getLabel(option)}
+              />
             );
           })}
         </FormGroup>

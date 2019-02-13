@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import classnames from 'classnames';
 
 const styles = theme => ({
   root: {
@@ -25,14 +26,41 @@ const styles = theme => ({
       maxWidth: '100%',
     },
   },
+  squareTop: {
+    borderTopRightRadius: 0,
+    borderTopLeftRadius: 0,
+  },
+  squareBottom: {
+    borderBottomRightRadius: 0,
+    borderBottomLeftRadius: 0,
+  },
+  noShadow: {
+    boxShadow: 'none',
+  },
   title: {
     textTransform: 'capitalize',
     marginBottom: theme.spacing.unit * 1,
   },
 });
 
-const Page = ({ children, classes, title, fullwidth }) => (
-  <Paper className={fullwidth ? classes.fullwidth : classes.root}>
+const Page = ({
+  children,
+  classes,
+  title,
+  fullwidth,
+  squareTop,
+  squareBottom,
+  noShadow,
+}) => (
+  <Paper
+    className={classnames({
+      [classes.fullwidth]: fullwidth,
+      [classes.root]: !fullwidth,
+      [classes.squareTop]: squareTop,
+      [classes.squareBottom]: squareBottom,
+      [classes.noShadow]: noShadow,
+    })}
+  >
     {title && (
       <Typography variant="h4" className={classes.title}>
         {title}

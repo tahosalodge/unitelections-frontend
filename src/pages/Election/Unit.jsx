@@ -4,7 +4,7 @@ import { unitShape } from 'shapes/unit';
 import Unit from 'components/Unit';
 
 const ElectionUnitInformation = ({ unit }) => (
-  <Page title="Unit Information" fullwidth>
+  <Page title="Unit Information" fullwidth squareTop noShadow>
     <Unit unit={unit} />
   </Page>
 );

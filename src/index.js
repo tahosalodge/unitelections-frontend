@@ -15,6 +15,7 @@ import createStore from 'state';
 import history from 'utils/history';
 import { ConnectedFeatureProvider } from 'utils/features';
 import ErrorBoundary from 'components/ErrorBoundary';
+import * as serviceWorker from 'utils/serviceWorker';
 import App from './App';
 
 import 'index.css';
@@ -65,6 +66,7 @@ const Root = () => (
 );
 
 ReactDOM.render(<Root />, document.getElementById('root'));
+serviceWorker.register();
 
 if (module.hot) {
   module.hot.accept('./App', () => {

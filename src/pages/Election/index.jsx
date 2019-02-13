@@ -16,6 +16,7 @@ import { unitShape } from 'shapes/unit';
 import ElectionOverview from './Overview';
 import ElectionCandidates from './Candidates';
 import ElectionUnitInformation from './Unit';
+import ElectionReport from './Report';
 
 const ScheduleElection = lazy(() => import('forms/Election/Schedule'));
 const AddCandidate = lazy(() => import('./AddCandidate'));
@@ -63,10 +64,10 @@ class Election extends React.Component {
                   label: 'Unit',
                   path: 'unit',
                 },
-                // {
-                //   label: 'Report',
-                //   path: 'report',
-                // },
+                {
+                  label: 'Report',
+                  path: 'report',
+                },
               ]}
             />
             <Router>
@@ -86,6 +87,11 @@ class Election extends React.Component {
                 path="candidates/new"
               />
               <ScheduleElection path="schedule" />
+              <ElectionReport
+                election={election}
+                candidates={candidates}
+                path="report"
+              />
 
               <Redirect
                 from={`/elections/${electionId}`}

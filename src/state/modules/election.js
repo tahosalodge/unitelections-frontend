@@ -7,10 +7,12 @@ import { errorNotification } from 'state/modules/notification';
 import history from 'utils/history';
 import ReactGA from 'react-ga';
 import { getUnit } from './unit';
+import { listSuccess as candidateListSuccess } from './candidate';
 
 export const actions = createActions('ELECTION');
 
 const SCHEDULE_ELECTION = 'SCHEDULE_ELECTION';
+const REPORT_ELECTION = 'REPORT_ELECTION';
 
 const initialState = {
   items: {},
@@ -127,6 +129,14 @@ export const scheduleElection = election => ({
   },
 });
 
+export const reportElection = (id, patch) => ({
+  type: REPORT_ELECTION,
+  payload: {
+    id,
+    patch,
+  },
+});
+
 function* create({ payload }) {
   try {
     const { election } = yield call(apiRequest, '/v1/election', 'POST', {
@@ -206,6 +216,26 @@ function* schedule({ payload: { election } }) {
   }
 }
 
+function* report({ payload: { id, patch } }) {
+  try {
+    const { election, candidates } = yield call(
+      apiRequest,
+      `/v1/election/${id}/report`,
+      'PATCH',
+      patch
+    );
+    ReactGA.event({
+      category: 'Election',
+      action: 'Reported',
+    });
+    yield put(updateSuccess(election));
+    yield put(candidateListSuccess(candidates));
+  } catch (error) {
+    yield put(updateFailure(error));
+    yield put(errorNotification(error));
+  }
+}
+
 export function* saga() {
   yield takeLatest(actions.create.request, create);
   yield takeLatest(actions.list.request, list);
@@ -213,4 +243,5 @@ export function* saga() {
   yield takeLatest(actions.update.request, update);
   yield takeLatest(actions.delete.request, remove);
   yield takeLatest(SCHEDULE_ELECTION, schedule);
+  yield takeLatest(REPORT_ELECTION, report);
 }
