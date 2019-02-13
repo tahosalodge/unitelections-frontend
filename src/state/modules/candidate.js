@@ -38,7 +38,7 @@ export const listCandidates = () => ({
   type: actions.list.request,
 });
 
-const listSuccess = candidates => ({
+export const listSuccess = candidates => ({
   type: actions.list.success,
   payload: {
     items: normalize(candidates, '_id'),
