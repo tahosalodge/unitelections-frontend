@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+/* eslint-disable no-alert */
 // This optional code is used to register a service worker.
 // register() is not called by default.
 
@@ -37,10 +38,12 @@ function registerValidSW(swUrl, config) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
               // content until all client tabs are closed.
-              console.log(
-                'New content is available and will be used when all ' +
-                  'tabs for this page are closed. See http://bit.ly/CRA-PWA.'
+              const accepted = window.confirm(
+                'An update is available, press OK to refresh.'
               );
+              if (accepted) {
+                window.location.reload();
+              }
 
               // Execute callback
               if (config && config.onUpdate) {
