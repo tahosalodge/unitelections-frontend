@@ -1,14 +1,51 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import * as Sentry from '@sentry/browser';
 import ReactGA from 'react-ga';
-import apiRequest from 'utils/apiRequest';
-import { addNotification } from 'state/modules/notification';
-import history from 'utils/history';
+import { AnyAction } from 'redux';
+import apiRequest from '../../utils/apiRequest';
+import { addNotification } from './notification';
+import history from '../../utils/history';
 
-const initialState = {
+interface BelongsTo {
+  _id: string;
+  organization: string;
+  canManage: boolean;
+  model: string;
+}
+
+interface Chapter {
+  _id: string;
+  district: string;
+  name: string;
+}
+
+interface User {
+  id: string;
+  token: string;
+  fname: string;
+  lname: string;
+  email: string;
+  belongsTo: Array<BelongsTo>;
+  isAdmin: boolean;
+}
+
+interface Lodge {
+  _id: string;
+  name: string;
+  council: number;
+  chapters: Array<Chapter>;
+}
+
+export interface AuthState {
+  loggedIn: boolean;
+  user?: User;
+  lodge?: Lodge;
+}
+
+const initialState: AuthState = {
   loggedIn: false,
-  user: {},
-  lodge: {},
+  user: undefined,
+  lodge: undefined,
 };
 
 export const actions = {
@@ -31,7 +68,7 @@ export const actions = {
   requestNewPassword: 'REQUEST_NEW_PASSWORD',
 };
 
-export function reducer(state = initialState, action) {
+export function reducer(state = initialState, action: AnyAction) {
   const { type, payload } = action;
   switch (type) {
     case actions.login.success:
@@ -50,7 +87,12 @@ export function reducer(state = initialState, action) {
   }
 }
 
-export function login(payload) {
+interface LoginPayload {
+  email: string;
+  password: string;
+}
+
+export function login(payload: LoginPayload) {
   return {
     type: actions.login.request,
     payload,
@@ -114,7 +156,7 @@ export function requestNewPassword({ email }) {
   };
 }
 
-function* registerSaga({ payload }) {
+function* registerSaga({ payload }: AnyAction) {
   try {
     const response = yield call(
       apiRequest,
@@ -138,7 +180,7 @@ function* registerSaga({ payload }) {
   }
 }
 
-function* loginSaga({ payload }) {
+function* loginSaga({ payload }: AnyAction) {
   try {
     const response = yield call(apiRequest, '/v1/user/login', 'POST', payload);
     localStorage.setItem('token', response.user.token);
@@ -195,7 +237,7 @@ function* logoutSaga() {
   }
 }
 
-function* resetPasswordSaga({ payload }) {
+function* resetPasswordSaga({ payload }: AnyAction) {
   try {
     yield call(apiRequest, '/v1/user/reset-password', 'POST', payload);
     yield put(login({ email: payload.email, password: payload.password }));
@@ -216,7 +258,7 @@ function* resetPasswordSaga({ payload }) {
   }
 }
 
-function* requestNewPasswordSaga({ payload }) {
+function* requestNewPasswordSaga({ payload }: AnyAction) {
   try {
     yield call(apiRequest, '/v1/user/create-reset-token', 'POST', payload);
     ReactGA.event({
@@ -243,7 +285,7 @@ function* requestNewPasswordSaga({ payload }) {
   }
 }
 
-function* setSentryScope({ payload: { user } }) {
+function* setSentryScope({ payload: { user } }: AnyAction) {
   yield Sentry.configureScope(scope => {
     scope.setUser({
       id: user._id,
