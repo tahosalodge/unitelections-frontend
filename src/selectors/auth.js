@@ -1,4 +1,5 @@
 import get from 'lodash/get';
+import { selectElection } from './election';
 
 export const getAuth = state => state.auth;
 
@@ -16,11 +17,16 @@ export const getIsAdmin = state => get(state.auth, ['user', 'isAdmin'], false);
 
 export const getCanReportElection = (state, { electionId }) => {
   const manageableChapters = getManageableChapters(state);
+  const election = selectElection(state, { electionId });
+  if (!election) {
+    return false;
+  }
   const isAdmin = getIsAdmin(state);
-  const canManageChapter = manageableChapters.includes(electionId);
+  const canManageChapter = manageableChapters
+    .map(({ organization }) => organization)
+    .includes(election.chapter);
   if (isAdmin || canManageChapter) {
     return true;
   }
-
   return false;
 };
