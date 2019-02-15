@@ -6,6 +6,7 @@ import { reducer as auth } from './modules/auth';
 import { reducer as unit } from './modules/unit';
 import { reducer as election } from './modules/election';
 import { reducer as candidate } from './modules/candidate';
+import { reducer as nomination } from './modules/nomination';
 import loading from './modules/loading';
 
 const appReducer = combineReducers({
@@ -16,6 +17,7 @@ const appReducer = combineReducers({
   unit,
   election,
   candidate,
+  nomination,
   loading,
 });
 
