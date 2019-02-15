@@ -7,7 +7,6 @@ import Fab from '@material-ui/core/Fab';
 import IconButton from '@material-ui/core/IconButton';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import AddIcon from '@material-ui/icons/Add';
-import { electionShape } from 'shapes/election';
 
 const columns = [
   {
@@ -33,21 +32,18 @@ const columns = [
   },
 ];
 
-const ElectionNominations = ({ election, nominations }) => (
+const ElectionNominations = ({ nominations }) => (
   <Page title="Nominations" fullwidth squareTop noShadow>
     <Table columns={columns} data={nominations} />
     <br />
-    {election.status !== 'Reported' && (
-      <Fab component={Link} to="new">
-        <AddIcon />
-      </Fab>
-    )}
+    <Fab component={Link} to="new">
+      <AddIcon />
+    </Fab>
   </Page>
 );
 
 ElectionNominations.propTypes = {
   nominations: arrayOfNominations.isRequired,
-  election: electionShape.isRequired,
 };
 
 export default ElectionNominations;

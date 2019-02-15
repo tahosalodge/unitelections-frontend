@@ -17,7 +17,6 @@ import validationSchema from './validationSchema';
 
 const styles = theme => ({
   inputs: {
-    margin: theme.spacing.unit * 2,
     width: '95%',
   },
   submit: {
