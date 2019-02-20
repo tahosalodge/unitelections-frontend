@@ -34,7 +34,7 @@
     "start": "NODE_PATH=src/ react-scripts start",
     "build": "NODE_PATH=src/ react-scripts build",
     "build:with-stats": "NODE_PATH=src react-scripts build --stats",
-    "analyze": "webpack-bundle-analyzer build/bundle-stats.json -m server"
+    "analyze": "webpack-bundle-analyzer build/bundle-stats.json -m server",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint src --ext .js,.jsx",
