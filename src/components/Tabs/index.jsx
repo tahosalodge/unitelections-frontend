@@ -4,8 +4,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-const TabsComponent = ({ tabs, value }) => (
-  <AppBar position="static" color="default">
+const TabsComponent = ({ tabs, value, id }) => (
+  <AppBar id={id} position="static" color="default">
     <Tabs
       value={value}
       // onChange={this.handleChange}

@@ -23,6 +23,7 @@ import ElectionUnitInformation from './Unit';
 import ElectionReport from './Report';
 import ElectionNominations from './Nominations';
 import AddNomination from './AddNomination';
+import Ballots from './Ballots';
 
 const ScheduleElection = lazy(() => import('forms/Election/Schedule'));
 const AddCandidate = lazy(() => import('./AddCandidate'));
@@ -64,6 +65,10 @@ class Election extends React.Component {
         label: 'Unit',
         path: 'unit',
       },
+      {
+        label: 'Ballots',
+        path: 'ballots',
+      },
     ];
 
     if (canReportElection) {
@@ -89,9 +94,10 @@ class Election extends React.Component {
     return (
       <Loading loading={loading}>
         {election && unit && (
-          <Paper>
+          <Paper id="election-container">
             <ElectionOverview election={election} />
             <Tabs
+              id="election-tabs"
               value={this.props['*'] || 'candidates'}
               tabs={this.getTabs()}
             />
@@ -126,6 +132,11 @@ class Election extends React.Component {
                 election={election}
                 candidates={candidates}
                 path="report"
+              />
+              <Ballots
+                election={election}
+                candidates={candidates}
+                path="ballots"
               />
 
               <Redirect

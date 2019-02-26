@@ -51,8 +51,10 @@ const Page = ({
   squareTop,
   squareBottom,
   noShadow,
+  id,
 }) => (
   <Paper
+    id={id}
     className={classnames({
       [classes.fullwidth]: fullwidth,
       [classes.root]: !fullwidth,

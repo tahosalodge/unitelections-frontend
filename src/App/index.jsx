@@ -31,6 +31,7 @@ class App extends React.Component {
       <Fragment>
         <div className={classes.root}>
           <Header
+            id="app-header"
             classes={classes}
             open={open}
             handleOpen={this.toggleDrawer}

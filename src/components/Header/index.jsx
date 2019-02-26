@@ -10,8 +10,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 // import NotificationsIcon from '@material-ui/icons/Notifications';
 
-const Header = ({ classes, open, handleOpen, auth }) => (
-  <AppBar position="absolute" className={classes.appBar}>
+const Header = ({ classes, open, handleOpen, auth, id }) => (
+  <AppBar id={id} position="absolute" className={classes.appBar}>
     <Toolbar disableGutters={!open} className={classes.toolbar}>
       <IconButton
         color="inherit"
