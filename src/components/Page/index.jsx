@@ -14,6 +14,7 @@ const styles = theme => ({
     maxWidth: theme.spacing.unit * 100,
     [theme.breakpoints.down('md')]: {
       maxWidth: '100%',
+      paddingBottom: theme.spacing.unit * 10,
     },
   },
   fullwidth: {
@@ -24,6 +25,7 @@ const styles = theme => ({
     maxWidth: '100%',
     [theme.breakpoints.down('md')]: {
       maxWidth: '100%',
+      paddingBottom: theme.spacing.unit * 10,
     },
   },
   squareTop: {
@@ -77,11 +79,19 @@ Page.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string,
   fullwidth: PropTypes.bool,
+  squareTop: PropTypes.bool,
+  squareBottom: PropTypes.bool,
+  noShadow: PropTypes.bool,
+  id: PropTypes.string,
 };
 
 Page.defaultProps = {
   title: null,
   fullwidth: false,
+  squareTop: false,
+  squareBottom: false,
+  noShadow: false,
+  id: '',
 };
 
 export default withStyles(styles)(Page);
