@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import compose from 'lodash/fp/compose';
 import Dialog from 'components/Dialog';
 import NominationForm from 'forms/Nomination';
-import { createNomination } from 'state/modules/nomination';
+import { updateNomination } from 'state/modules/nomination';
 import { electionShape } from 'shapes/election';
 
 const AddNomination = ({
@@ -14,7 +14,7 @@ const AddNomination = ({
 }) => (
   <Dialog titleId="add-candidate-title" maxWidth="sm">
     <NominationForm
-      onSave={props.createNomination}
+      onSave={props.updateNomination}
       initialValues={{ election: electionId, unit, chapter, unitType }}
       cancelPath={`/elections/${electionId}/nomination`}
     />
@@ -23,13 +23,13 @@ const AddNomination = ({
 
 AddNomination.propTypes = {
   election: electionShape.isRequired,
-  createNomination: PropTypes.func.isRequired,
+  updateNomination: PropTypes.func.isRequired,
   unitType: PropTypes.string.isRequired,
 };
 
 export default compose(
   connect(
     null,
-    { createNomination }
+    { updateNomination }
   )
 )(AddNomination);
