@@ -26,7 +26,7 @@ const columns = [
     title: '',
     // eslint-disable-next-line
     render: ({ _id }) => (
-      <IconButton component={Link} to={`/candidates/${_id}`}>
+      <IconButton component={Link} to={`/candidate/${_id}`}>
         <MoreIcon />
       </IconButton>
     ),
