@@ -1,42 +1,35 @@
 import React, { memo } from 'react';
 import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Legend,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar,
 } from 'recharts';
 
 // eslint-disable-next-line react/prop-types
-const LineChartComponent = ({ data }) => {
+const ElectionsByChapter = ({ data }) => {
   return (
-    <LineChart
-      width={500}
-      height={300}
+    <RadarChart
+      cx={300}
+      cy={250}
+      outerRadius={150}
+      width={600}
+      height={500}
       data={data}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      }}
     >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="name" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Line
-        type="monotone"
-        dataKey="count"
+      <PolarGrid />
+      <PolarAngleAxis dataKey="name" />
+      <PolarRadiusAxis />
+      <Radar
         name="Elections"
+        dataKey="count"
         stroke="#8884d8"
-        activeDot={{ r: 8 }}
+        fill="#8884d8"
+        fillOpacity={0.6}
       />
-    </LineChart>
+    </RadarChart>
   );
 };
 
-export default memo(LineChartComponent);
+export default memo(ElectionsByChapter);

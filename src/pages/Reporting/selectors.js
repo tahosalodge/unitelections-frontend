@@ -22,6 +22,7 @@ const electionsByChapter = ({ elections, chapters }) => {
   return Object.entries(bins).map(([chapterId, electionsInChapter]) => ({
     name: chapters.find(c => c._id === chapterId).name,
     count: electionsInChapter.length,
+    fullMark: elections.length,
   }));
 };
 
