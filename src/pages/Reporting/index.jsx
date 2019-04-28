@@ -19,6 +19,7 @@ import { arrayOfChapters } from 'shapes/auth';
 
 import ElectionsByMonth from './ElectionsByMonth';
 import ElectionsByChapter from './ElectionsByChapter';
+import ElectionsByDOW from './ElectionsByDOW';
 import { calculateReports } from './selectors';
 
 const Reports = ({
@@ -46,6 +47,8 @@ const Reports = ({
       <ElectionsByMonth data={reports.electionsByMonth} />
       <Typography variant="h6">Elections by Chapter</Typography>
       <ElectionsByChapter data={reports.electionsByChapter} />
+      <Typography variant="h6">Elections by Day of Week</Typography>
+      <ElectionsByDOW data={reports.electionsByDOW} />
     </Page>
   );
 };
