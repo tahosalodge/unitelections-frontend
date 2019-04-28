@@ -25,6 +25,7 @@ const EditUser = lazy(() => import('pages/Users/Edit'));
 const ResetPassword = lazy(() => import('pages/ResetPassword'));
 const RequestNewPassword = lazy(() => import('components/Login/ResetPassword'));
 const ScheduleElection = lazy(() => import('forms/Election/Schedule'));
+const Reporting = lazy(() => import('pages/Reporting'));
 
 const AdminRoutes = ({ auth, children }) => {
   if (auth.user.isAdmin) {
@@ -60,6 +61,7 @@ const Routes = ({ auth }) => (
           <EditUser path=":userId" />
         </Users>
         <Lodges path="lodges" />
+        <Reporting path="reporting" />
       </AdminRoutes>
       <Home default />
     </Suspense>
