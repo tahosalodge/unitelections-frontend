@@ -32,7 +32,7 @@ const LineChartComponent = ({ data }) => {
         type="monotone"
         dataKey="count"
         name="Elections"
-        stroke="#8884d8"
+        stroke="#005596"
         activeDot={{ r: 8 }}
       />
     </LineChart>

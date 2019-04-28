@@ -26,8 +26,8 @@ const ElectionsByChapter = ({ data }) => {
       <Radar
         name="Elections"
         dataKey="count"
-        stroke="#8884d8"
-        fill="#8884d8"
+        stroke="#005596"
+        fill="#005596"
         fillOpacity={0.6}
       />
     </RadarChart>
