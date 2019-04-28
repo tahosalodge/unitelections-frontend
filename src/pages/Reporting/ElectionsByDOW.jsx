@@ -5,6 +5,7 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
   Radar,
+  Tooltip,
 } from 'recharts';
 
 // eslint-disable-next-line react/prop-types
@@ -21,6 +22,7 @@ const ElectionsByDOW = ({ data }) => {
       <PolarGrid />
       <PolarAngleAxis dataKey="name" />
       <PolarRadiusAxis />
+      <Tooltip />
       <Radar
         name="Elections"
         dataKey="count"
