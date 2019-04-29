@@ -6,6 +6,7 @@ import List from '@material-ui/core/List';
 import GroupIcon from '@material-ui/icons/Group';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import LockIcon from '@material-ui/icons/Lock';
+import ChartIcon from '@material-ui/icons/InsertChart';
 
 import authShape from 'shapes/auth';
 import NavigationItem from './Item';
@@ -49,6 +50,13 @@ const Navigation = ({ classes, open, handleClose, auth }) => (
                 onClick={handleClose}
               >
                 <GroupIcon />
+              </NavigationItem>
+              <NavigationItem
+                to="/admin/reporting"
+                label="Reporting"
+                onClick={handleClose}
+              >
+                <ChartIcon />
               </NavigationItem>
             </Fragment>
           )}
