@@ -17,9 +17,11 @@ import { arrayOfUnits } from 'shapes/unit';
 import { arrayOfNominations } from 'shapes/nomination';
 import { arrayOfChapters } from 'shapes/auth';
 
+import { getUnits } from 'selectors/unit';
 import ElectionsByMonth from './ElectionsByMonth';
 import ElectionsByChapter from './ElectionsByChapter';
 import ElectionsByDOW from './ElectionsByDOW';
+import CandidatesByUnitType from './CandidatesByUnitType';
 import { calculateReports } from './selectors';
 
 const Reports = ({
@@ -41,6 +43,8 @@ const Reports = ({
       calculateReports({ elections, candidates, units, nominations, chapters }),
     [elections, candidates, units, nominations, chapters]
   );
+
+  console.log(reports);
   return (
     <Page title="reports">
       <Typography variant="h6">Elections by Month</Typography>
@@ -49,6 +53,8 @@ const Reports = ({
       <ElectionsByChapter data={reports.electionsByChapter} />
       <Typography variant="h6">Elections by Day of Week</Typography>
       <ElectionsByDOW data={reports.electionsByDOW} />
+      <Typography variant="h6">Unit Type</Typography>
+      <CandidatesByUnitType data={reports.unitType} />
     </Page>
   );
 };
@@ -56,7 +62,7 @@ const Reports = ({
 const mapStateToProps = state => ({
   elections: selectElections(state),
   candidates: selectCandidates(state),
-  units: [],
+  units: getUnits(state),
   nominations: selectNominations(state),
   chapters: getChapters(state),
 });

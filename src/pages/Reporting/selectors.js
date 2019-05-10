@@ -12,6 +12,7 @@ export const electionsByMonth = elections => {
     count: electionsInMonth.length,
   }));
 };
+
 export const electionsByDOW = elections => {
   const electionsWithDate = elections.filter(election => election.date);
   const bins = groupBy(electionsWithDate, ({ date }) => {
@@ -34,8 +35,40 @@ const electionsByChapter = ({ elections, chapters }) => {
   }));
 };
 
-export const calculateReports = ({ elections, chapters }) => ({
+const byUnitType = ({ candidates, units, elections }) => {
+  const electionBins = groupBy(elections, ({ unit }) => {
+    const electionUnit = units
+      .filter(u => u.unitType)
+      .find(u => u._id === unit);
+    return electionUnit ? electionUnit.type : 'Troop';
+  });
+  const candidateBins = groupBy(candidates, ({ unit, unitType }) => {
+    const candidateUnit =
+      unitType || units.filter(u => u.unitType).find(u => u._id === unit);
+    return candidateUnit ? candidateUnit.unitType : 'Troop';
+  });
+  return {
+    elections: Object.entries(electionBins).map(([type, electionsForType]) => ({
+      name: type,
+      count: electionsForType.length,
+    })),
+    candidates: Object.entries(candidateBins).map(
+      ([type, candidatesForType]) => ({
+        name: type,
+        count: candidatesForType.length,
+      })
+    ),
+  };
+};
+
+export const calculateReports = ({
+  elections,
+  chapters,
+  candidates,
+  units,
+}) => ({
   electionsByMonth: electionsByMonth(elections),
   electionsByChapter: electionsByChapter({ elections, chapters }),
   electionsByDOW: electionsByDOW(elections),
+  unitType: byUnitType({ candidates, units, elections }),
 });
